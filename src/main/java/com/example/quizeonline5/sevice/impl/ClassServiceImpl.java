@@ -37,7 +37,7 @@ public class ClassServiceImpl implements ClassService {
             throw new IllegalArgumentException("Subject ID must not be null");
         }
 
-        User teacher = userRepository.findById(classDto.getTeacherId())
+        User teacher = userRepository.findByUserId(classDto.getTeacherId())
                 .orElseThrow(() -> new IllegalArgumentException("Teacher not found"));
 
         Subject subject = subjectRepository.findById(classDto.getSubjectId())
