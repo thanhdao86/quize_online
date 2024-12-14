@@ -1,8 +1,13 @@
 package com.example.quizeonline5.controller;
 
+import com.example.quizeonline5.dto.ApiResponse;
 import com.example.quizeonline5.dto.ClassDto;
+import com.example.quizeonline5.dto.CommonResponse;
+import com.example.quizeonline5.dto.StudentDto;
+import com.example.quizeonline5.entity.Classes;
 import com.example.quizeonline5.sevice.ClassService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,29 +22,34 @@ public class ClassController {
 
     @GetMapping
     public ResponseEntity<?> getAllClasses() {
-        return ResponseEntity.ok(classService.getAllClasses());
+        return new ResponseEntity< >(CommonResponse.success(classService.getAllClasses()), HttpStatus.OK);
+//        return ResponseEntity.ok(classService.getAllClasses());
     }
 
 
     @PostMapping
-    public ResponseEntity<?> createClass(@RequestBody ClassDto classDto) {
-        Long classId = classService.createClass(classDto);
-        return ResponseEntity.ok().body("Class created successfully with ID: " + classId);
+    public ResponseEntity<ApiResponse> createClass(@RequestBody ClassDto classDto) {
+        ApiResponse apiResponse = classService.createClass(classDto);
+        return new ResponseEntity< >(apiResponse, HttpStatus.OK);
     }
 
     @DeleteMapping("/{classId}")
-    public ResponseEntity<?> deleteClass(@PathVariable Long classId) {
-        classService.deleteClass(classId);
-        return ResponseEntity.ok().body("Class deleted successfully");
+    public ResponseEntity<ApiResponse> deleteClass(@PathVariable Long classId) {
+        ApiResponse apiResponse = classService.deleteClass(classId);
+        if (apiResponse.getSuccess()) {
+            return new ResponseEntity< >(apiResponse, HttpStatus.OK);
+        }
+        return  new ResponseEntity< >(apiResponse, HttpStatus.BAD_REQUEST);
     }
 
     @PutMapping("/{classId}")
-    public ResponseEntity<?> updateClass(@PathVariable Long classId, @RequestBody ClassDto classDto) {
-        classService.updateClass(classId, classDto);
-        return ResponseEntity.ok().body("Class updated successfully");
+    public ResponseEntity<ApiResponse> updateClass(@PathVariable Long classId, @RequestBody ClassDto classDto) {
+        ApiResponse apiResponse = classService.updateClass(classId, classDto);
+        if (apiResponse.getSuccess()) {
+            return new ResponseEntity< >(apiResponse, HttpStatus.OK);
+        }
+        return  new ResponseEntity< >(apiResponse, HttpStatus.BAD_REQUEST);
     }
-
-
 
     @GetMapping("/{classId}/students")
     public ResponseEntity<?> getStudentsInClass(@PathVariable Long classId) {
@@ -54,5 +64,21 @@ public class ClassController {
     @GetMapping("/teachers/{teacherId}/classes")
     public ResponseEntity<?> getClassesByTeacher(@PathVariable Long teacherId) {
         return ResponseEntity.ok(classService.getClassesByTeacher(teacherId));
+    }
+
+    // get class by classId
+    @GetMapping("/{classId}")
+    public ResponseEntity<CommonResponse> getClassById(@PathVariable Long classId) {
+        Classes dtClass = classService.getClassById(classId);
+        if (dtClass != null) {
+            return new ResponseEntity< >(CommonResponse.success(dtClass), HttpStatus.OK);
+        }
+        return new ResponseEntity< >(CommonResponse.error("Class not found"), HttpStatus.NOT_FOUND);
+    }
+
+    @PostMapping("/{classId}/students")
+    public ResponseEntity<ApiResponse> addStudentToClass(@PathVariable Long classId, @RequestBody StudentDto studentDto) {
+        ApiResponse apiResponse = classService.addStudentToClass(classId, studentDto);
+        return new ResponseEntity<>(apiResponse, HttpStatus.OK);
     }
 }

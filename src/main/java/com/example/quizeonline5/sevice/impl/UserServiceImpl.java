@@ -1,5 +1,7 @@
 package com.example.quizeonline5.sevice.impl;
 
+import com.example.quizeonline5.dto.UserPrincipal;
+import com.example.quizeonline5.dto.UserSummary;
 import com.example.quizeonline5.entity.User;
 import com.example.quizeonline5.exception.AppException;
 import com.example.quizeonline5.repository.UserRepository;
@@ -25,8 +27,10 @@ public class UserServiceImpl implements UserService {
         return userRepository.findByEmail(email).orElseThrow(() -> new AppException("User not found"));
     }
 
-//    @Override
-//    public User finByUserId(Long id) {
-//        return userRepository.findByUserId(id).orElseThrow(() -> new AppException("User not found"));
-//    }
+    @Override
+    public UserSummary getCurrentUser(UserPrincipal currentUser) {
+        return new UserSummary(currentUser.getId(), currentUser.getEmail(), currentUser.getRole(),
+                currentUser.getUsername());
+    }
+
 }

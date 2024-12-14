@@ -3,6 +3,7 @@ package com.example.quizeonline5.entity;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Entity
 @Table(name = "question_banks")
@@ -69,11 +70,22 @@ public class QuestionBank {
     public QuestionBank() {
     }
 
+    @OneToMany(mappedBy = "questionBank", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Question> questions;
+
     public QuestionBank(Long questionBankId, String bankName, User createdBy, boolean isPublic, LocalDateTime createdAt) {
         this.questionBankId = questionBankId;
         this.bankName = bankName;
         this.createdBy = createdBy;
         this.isPublic = isPublic;
         this.createdAt = createdAt;
+    }
+
+    public Set<Question> getQuestions() {
+        return questions;
+    }
+
+    public void setQuestions(Set<Question> questions) {
+        this.questions = questions;
     }
 }

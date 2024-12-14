@@ -3,35 +3,37 @@ package com.example.quizeonline5.entity;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "classes")
 public class Classes {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long classId;
 
-    @Column(name = "class_name")
     private String className;
 
     @ManyToOne
-    @JoinColumn(name = "teacher_id", nullable = false)
+    @JoinColumn(name = "teacher_id")
     private User teacher;
 
     @ManyToOne
-    @JoinColumn(name = "subject_id", nullable = false)
+    @JoinColumn(name = "subject_id")
     private Subject subject;
 
-    @Column(name = "created_at")
-    private LocalDateTime createdAt;
+    @ManyToMany
+    @JoinTable(
+            name = "class_students",
+            joinColumns = @JoinColumn(name = "class_id"),
+            inverseJoinColumns = @JoinColumn(name = "student_id")
+    )
+    private Set<User> students = new HashSet<>();
 
-    @Column(name = "updated_at")
+    private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
-    @OneToMany(mappedBy = "classEntity", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<ClassStudent> students;
-
+    // Getters and Setters
     public Long getClassId() {
         return classId;
     }
@@ -64,6 +66,14 @@ public class Classes {
         this.subject = subject;
     }
 
+    public Set<User> getStudents() {
+        return students;
+    }
+
+    public void setStudents(Set<User> students) {
+        this.students = students;
+    }
+
     public LocalDateTime getCreatedAt() {
         return createdAt;
     }
@@ -78,26 +88,5 @@ public class Classes {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
-    }
-
-    public Set<ClassStudent> getStudents() {
-        return students;
-    }
-
-    public void setStudents(Set<ClassStudent> students) {
-        this.students = students;
-    }
-
-    public Classes(Long classId, String className, User teacher, Subject subject, LocalDateTime createdAt, LocalDateTime updatedAt, Set<ClassStudent> students) {
-        this.classId = classId;
-        this.className = className;
-        this.teacher = teacher;
-        this.subject = subject;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
-        this.students = students;
-    }
-
-    public Classes() {
     }
 }

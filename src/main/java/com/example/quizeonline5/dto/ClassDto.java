@@ -1,8 +1,15 @@
 package com.example.quizeonline5.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class ClassDto {
+    @JsonProperty("class_name")
     String className;
+
+    @JsonProperty("subject_id")
     Long subjectId;
+
+    @JsonProperty("teacher_id")
     Long teacherId;
 
     public String getClassName() {
