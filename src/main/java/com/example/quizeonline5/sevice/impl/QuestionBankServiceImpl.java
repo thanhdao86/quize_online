@@ -10,7 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 public class QuestionBankServiceImpl implements QuestionBankService {
@@ -61,5 +64,18 @@ public class QuestionBankServiceImpl implements QuestionBankService {
     public QuestionBank getQuestionBankDetails(Long questionBankId) {
         return questionBankRepository.findById(questionBankId)
                 .orElseThrow(() -> new IllegalArgumentException("Question Bank not found"));
+    }
+
+    @Override
+    public List<Map<String, Object>> getAllQuestionBank() {
+        return questionBankRepository.findAll().stream().map(questionBank -> {
+            Map<String, Object> map = new HashMap<>();
+            map.put("question_bank_id", questionBank.getQuestionBankId());
+            map.put("bank_name", questionBank.getBankName());
+            map.put("is_public", questionBank.isPublic());
+            map.put("created_by", questionBank.getCreatedBy());
+            map.put("created_at", questionBank.getCreatedAt());
+            return map;
+        }).collect(Collectors.toList());
     }
 }

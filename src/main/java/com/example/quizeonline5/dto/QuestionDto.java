@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class QuestionDto {
     @JsonProperty("question_content")
     private String questionContent;
+    @JsonProperty("answer")
+    private String answer;
     @JsonProperty("correct_answer")
     private String correctAnswer;
     @JsonProperty("bank_id")
@@ -32,5 +34,13 @@ public class QuestionDto {
 
     public void setBankId(Long bankId) {
         this.bankId = bankId;
+    }
+
+    public String getAnswer() {
+        return answer;
+    }
+
+    public void setAnswer(String answer) {
+        this.answer = answer;
     }
 }

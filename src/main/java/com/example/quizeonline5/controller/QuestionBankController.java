@@ -47,4 +47,9 @@ public class QuestionBankController {
     public ResponseEntity<?> getQuestionBankDetails(@PathVariable Long id) {
         return new ResponseEntity< >(CommonResponse.success(questionBankService.getQuestionBankDetails(id)), HttpStatus.OK);
     }
+
+    @GetMapping
+    public ResponseEntity<?> getAllQuestionBank() {
+        return new ResponseEntity< >(CommonResponse.success(questionBankService.getAllQuestionBank()), HttpStatus.OK);
+    }
 }
