@@ -12,4 +12,5 @@ public interface UserService {
     User getUserById(Long userId);
     List<User> getUsers();
     User updateUser(Long userId, UserDto userDTO);
+    List<User> getUsersByRole(String role);
 }

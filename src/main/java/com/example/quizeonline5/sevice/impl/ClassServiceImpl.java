@@ -91,7 +91,9 @@ public class ClassServiceImpl implements ClassService {
             Map<String, Object> map = new HashMap<>();
             map.put("class_id", classEntity.getClassId());
             map.put("class_name", classEntity.getClassName());
+            map.put("subject_id", classEntity.getSubject().getSubjectId());
             map.put("subject_name", classEntity.getSubject().getSubjectName());
+            map.put("teacher_id", classEntity.getTeacher().getUserId());
             map.put("teacher_name", classEntity.getTeacher().getFullName());
             return map;
         }).collect(Collectors.toList());

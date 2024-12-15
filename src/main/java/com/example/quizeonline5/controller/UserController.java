@@ -77,4 +77,10 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(CommonResponse.error(e.getMessage()));
         }
     }
+
+    @GetMapping("/teacher")
+    public ResponseEntity<?> getUsersWithRoleTeacher() {
+        List<User> teachers = userService.getUsersByRole("teacher");
+        return ResponseEntity.ok(CommonResponse.success(teachers));
+    }
 }
