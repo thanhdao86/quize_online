@@ -1,5 +1,6 @@
 package com.example.quizeonline5.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
@@ -8,9 +9,11 @@ import java.time.LocalDateTime;
 public class Exam {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonProperty("exam_id")
     private Long examId;
 
     @Column(nullable = false)
+    @JsonProperty("exam_name")
     private String examName;
 
     @ManyToOne
@@ -19,13 +22,16 @@ public class Exam {
 
     @ManyToOne
     @JoinColumn(name = "class_id", nullable = false)
+    @JsonProperty("classes")
     private Classes classEntity;
 
     @ManyToOne
     @JoinColumn(name = "created_by", nullable = false)
+    @JsonProperty("created_by")
     private User createdBy;
 
     @Column(name = "created_at")
+    @JsonProperty("created_at")
     private LocalDateTime createdAt;
 
     @Column(nullable = false)

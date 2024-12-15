@@ -1,5 +1,6 @@
 package com.example.quizeonline5.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -10,19 +11,24 @@ import java.util.Set;
 public class QuestionBank {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonProperty("question_bank_id")
     private Long questionBankId;
 
     @Column(nullable = false)
+    @JsonProperty("bank_name")
     private String bankName;
 
     @ManyToOne
     @JoinColumn(name = "created_by", nullable = false)
+    @JsonProperty("created_by")
     private User createdBy;
 
     @Column(name = "is_public")
+    @JsonProperty("is_public")
     private boolean isPublic;
 
     @Column(name = "created_at")
+    @JsonProperty("created_at")
     private LocalDateTime createdAt;
 
     // Getters và Setters

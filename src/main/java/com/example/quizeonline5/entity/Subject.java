@@ -1,5 +1,6 @@
 package com.example.quizeonline5.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
 @Entity
@@ -7,9 +8,11 @@ import jakarta.persistence.*;
 public class Subject {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonProperty("subject_id")
     private Long subjectId;
 
     @Column(nullable = false)
+    @JsonProperty("subject_name")
     private String subjectName;
 
     private String description;

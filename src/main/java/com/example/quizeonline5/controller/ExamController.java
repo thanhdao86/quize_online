@@ -1,5 +1,6 @@
 package com.example.quizeonline5.controller;
 
+import com.example.quizeonline5.dto.CommonResponse;
 import com.example.quizeonline5.dto.ExamDto;
 import com.example.quizeonline5.sevice.ExamService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,6 @@ public class ExamController {
     @PostMapping
     public ResponseEntity<?> createExam(@RequestBody ExamDto examDto) {
         Long examId = examService.createExam(examDto);
-        return ResponseEntity.ok("Exam created successfully with ID: " + examId);
+        return ResponseEntity.ok(CommonResponse.success("Exam created successfully with ID: " + examId));
     }
 }

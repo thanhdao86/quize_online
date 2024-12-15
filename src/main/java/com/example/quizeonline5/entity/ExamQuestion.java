@@ -21,8 +21,6 @@ public class ExamQuestion {
     @Column(nullable = false)
     private int point;
 
-    // Getters và Setters
-
     public Long getId() {
         return id;
     }

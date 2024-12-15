@@ -1,5 +1,6 @@
 package com.example.quizeonline5.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
@@ -8,6 +9,7 @@ import java.time.LocalDateTime;
 public class Result {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonProperty("result_id")
     private Long resultId;
 
     @ManyToOne
@@ -22,6 +24,7 @@ public class Result {
     private double score;
 
     @Column(name = "submitted_at")
+    @JsonProperty("submitted_at")
     private LocalDateTime submittedAt;
 
     // Getters và Setters

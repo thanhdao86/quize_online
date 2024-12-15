@@ -1,6 +1,7 @@
 package com.example.quizeonline5.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
 @Entity
@@ -12,6 +13,7 @@ public class ClassStudent {
 
     @ManyToOne
     @JoinColumn(name = "class_id", nullable = false)
+    @JsonProperty("class_id")
     private Classes classEntity;
 
     @ManyToOne

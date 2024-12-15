@@ -279,3 +279,12 @@
 | POST   | `/api/exams` | Tạo đề thi mới từ ngân hàng câu hỏi     |
 
 
+## 4. Subject
+| Method | URL                   | Description                                |
+|--------|-----------------------|--------------------------------------------|
+| POST   | `/api/subjects`       | Tạo một môn học mới                        |
+| DELETE | `/api/subjects/{id}`  | Xóa môn học theo ID                        |
+| PUT    | `/api/subjects/{id}`  | Cập nhật thông tin môn học                 |
+| GET    | `/api/subjects`       | Lấy danh sách tất cả môn học               |
+| GET    | `/api/subjects/{id}`  | Lấy thông tin chi tiết môn học theo ID     |
+
