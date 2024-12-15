@@ -26,15 +26,12 @@ public class User {
     private String role;
 
     @Column(name = "full_name")
-    @JsonProperty("full_name")
     private String fullName;
 
     @Column(name = "created_at")
-    @JsonProperty("created_at")
     private LocalDateTime createdAt;
 
     @Column(name = "updated_at")
-    @JsonProperty("updated_at")
     private LocalDateTime updatedAt;
 
     // Getters and Setters

@@ -1,12 +1,12 @@
 package com.example.quizeonline5.sevice.impl;
 
+import com.example.quizeonline5.config.PasswordEncoder;
 import com.example.quizeonline5.dto.UserDto;
 import com.example.quizeonline5.entity.User;
 import com.example.quizeonline5.exception.AppException;
 import com.example.quizeonline5.repository.UserRepository;
 import com.example.quizeonline5.sevice.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -20,7 +20,7 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
 
     @Autowired
-    private BCryptPasswordEncoder passwordEncoder;
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public User registerUser(UserDto userDTO) {
