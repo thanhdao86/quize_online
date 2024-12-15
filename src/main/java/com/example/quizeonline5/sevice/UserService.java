@@ -1,13 +1,15 @@
 package com.example.quizeonline5.sevice;
 
-import com.example.quizeonline5.dto.UserPrincipal;
-import com.example.quizeonline5.dto.UserSummary;
+import com.example.quizeonline5.dto.UserDto;
 import com.example.quizeonline5.entity.User;
-import org.springframework.data.jpa.repository.Query;
+
+import java.util.List;
 
 public interface UserService {
-    User registerUser(User user);
+    User registerUser(UserDto userDTO);
+    User authenticateUser(String email, String password);
     User getUserByEmail(String email);
-//    User finByUserId(Long id);
-    UserSummary getCurrentUser(UserPrincipal currentUser);
+    User getUserById(Long userId);
+    List<User> getUsers();
+    User updateUser(Long userId, UserDto userDTO);
 }
