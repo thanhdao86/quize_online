@@ -1,5 +1,6 @@
 package com.example.quizeonline5.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -14,24 +15,29 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
+    @JsonProperty("user_id")
     private Long userId;
 
     @Column(unique = true, nullable = false)
     private String email;
 
     @Column(nullable = false)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
     @Column(nullable = false)
     private String role;
 
     @Column(name = "full_name")
+    @JsonProperty("full_name")
     private String fullName;
 
     @Column(name = "created_at")
+    @JsonProperty("created_at")
     private LocalDateTime createdAt;
 
     @Column(name = "updated_at")
+    @JsonProperty("updated_at")
     private LocalDateTime updatedAt;
 
     // Getters and Setters

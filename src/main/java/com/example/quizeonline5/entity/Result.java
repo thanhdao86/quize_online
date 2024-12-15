@@ -3,6 +3,7 @@ package com.example.quizeonline5.entity;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "results")
@@ -28,6 +29,8 @@ public class Result {
     private LocalDateTime submittedAt;
 
     // Getters và Setters
+    @OneToMany(mappedBy = "result", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ResultAnswer> answers; // Các câu trả lời của sinh viên
 
     public Long getResultId() {
         return resultId;

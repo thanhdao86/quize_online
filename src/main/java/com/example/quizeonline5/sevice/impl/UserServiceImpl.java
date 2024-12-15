@@ -70,6 +70,7 @@ public class UserServiceImpl implements UserService {
     public List<User> getUsers() {
         return userRepository.findAll().stream()
                 .filter(user -> !"admin".equalsIgnoreCase(user.getRole()))
+                .sorted((u1, u2) -> u2.getUserId().compareTo(u1.getUserId()))
                 .collect(Collectors.toList());
     }
 

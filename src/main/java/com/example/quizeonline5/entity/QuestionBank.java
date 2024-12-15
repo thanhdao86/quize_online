@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -76,8 +77,18 @@ public class QuestionBank {
     public QuestionBank() {
     }
 
-    @OneToMany(mappedBy = "questionBank", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "questionBank",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true)
     private Set<Question> questions;
+
+//    @ManyToMany
+//    @JoinTable(
+//            name = "class_students",
+//            joinColumns = @JoinColumn(name = "class_id"),
+//            inverseJoinColumns = @JoinColumn(name = "student_id")
+//    )
+//    private Set<User> questions = new HashSet<>();
 
     public QuestionBank(Long questionBankId, String bankName, User createdBy, boolean isPublic, LocalDateTime createdAt) {
         this.questionBankId = questionBankId;

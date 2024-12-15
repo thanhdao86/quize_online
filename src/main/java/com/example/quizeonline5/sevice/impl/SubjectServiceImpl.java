@@ -7,6 +7,7 @@ import com.example.quizeonline5.sevice.SubjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -19,7 +20,8 @@ public class SubjectServiceImpl implements SubjectService {
         Subject subject = new Subject();
         subject.setSubjectName(subjectDto.getSubjectName());
         subject.setDescription(subjectDto.getDescription());
-
+        subject.setCreatedAt(LocalDateTime.now());
+        subject.setUpdatedAt(LocalDateTime.now());
         subject = subjectRepository.save(subject);
         return subject.getSubjectId();
     }
@@ -39,13 +41,13 @@ public class SubjectServiceImpl implements SubjectService {
 
         subject.setSubjectName(subjectDto.getSubjectName());
         subject.setDescription(subjectDto.getDescription());
-
+        subject.setUpdatedAt(LocalDateTime.now());
         subjectRepository.save(subject);
     }
 
     @Override
     public List<Subject> getAllSubjects() {
-        return subjectRepository.findAll();
+        return subjectRepository.findAll().stream().toList();
     }
 
     @Override

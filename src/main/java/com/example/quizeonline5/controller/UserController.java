@@ -1,5 +1,6 @@
 package com.example.quizeonline5.controller;
 
+import com.example.quizeonline5.dto.CommonResponse;
 import com.example.quizeonline5.dto.UserDto;
 import com.example.quizeonline5.dto.UserResponseDto;
 import com.example.quizeonline5.entity.User;
@@ -24,9 +25,9 @@ public class UserController {
     public ResponseEntity<?> registerUser(@RequestBody UserDto userDTO) {
         try {
             User registeredUser = userService.registerUser(userDTO);
-            return new ResponseEntity<>(registeredUser, HttpStatus.CREATED);
+            return new ResponseEntity<>(CommonResponse.success(registeredUser), HttpStatus.CREATED);
         } catch (AppException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(CommonResponse.error(e.getMessage()));
         }
     }
 
@@ -40,7 +41,9 @@ public class UserController {
             responseDto.setEmail(authenticatedUser.getEmail());
             responseDto.setRole(authenticatedUser.getRole());
             responseDto.setFullName(authenticatedUser.getFullName());
-            return ResponseEntity.ok(responseDto);
+            responseDto.setCreatedAt(authenticatedUser.getCreatedAt());
+            responseDto.setUpdatedAt(authenticatedUser.getUpdatedAt());
+            return ResponseEntity.ok(CommonResponse.success(responseDto));
         } catch (AppException e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(e.getMessage());
         }
@@ -48,9 +51,9 @@ public class UserController {
 
     // Get User by Email
     @GetMapping("/{email}")
-    public ResponseEntity<User> getUserByEmail(@PathVariable String email) {
+    public ResponseEntity<?> getUserByEmail(@PathVariable String email) {
         User user = userService.getUserByEmail(email);
-        return ResponseEntity.ok(user);
+        return ResponseEntity.ok(CommonResponse.success(user));
     }
 
     @GetMapping("/me")
@@ -60,28 +63,18 @@ public class UserController {
     }
 
     @GetMapping("")
-    public ResponseEntity<List<UserResponseDto>> getUsersExcludingAdmin() {
+    public ResponseEntity<?> getUsersExcludingAdmin() {
         List<User> users = userService.getUsers();
-        List<UserResponseDto> userResponseDtos = users.stream().map(user -> {
-            UserResponseDto dto = new UserResponseDto();
-            dto.setUserId(user.getUserId());
-            dto.setEmail(user.getEmail());
-            dto.setRole(user.getRole());
-            dto.setFullName(user.getFullName());
-            dto.setCreatedAt(user.getCreatedAt());
-            dto.setUpdatedAt(user.getUpdatedAt());
-            return dto;
-        }).collect(Collectors.toList());
-        return ResponseEntity.ok(userResponseDtos);
+        return ResponseEntity.ok(CommonResponse.success(users));
     }
 
     @PutMapping("/{userId}")
     public ResponseEntity<?> updateUser(@PathVariable Long userId, @RequestBody UserDto userDTO) {
         try {
             User updatedUser = userService.updateUser(userId, userDTO);
-            return ResponseEntity.ok(updatedUser);
+            return ResponseEntity.ok(CommonResponse.success(updatedUser));
         } catch (AppException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(CommonResponse.error(e.getMessage()));
         }
     }
 }

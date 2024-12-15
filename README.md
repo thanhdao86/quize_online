@@ -143,8 +143,6 @@
   }
 ]
 ```
-  
-
 
 ## Quesion Bank
 | Method | URL                                    | Description                                    |
@@ -213,36 +211,52 @@
   "message": "Success",
   "data": [
     {
-      "questionBankId": 1,
-      "bankName": "Ngân hàng câu hỏi Toán",
-      "createdBy": {
-        "userId": 1,
-        "email": "user@example.com",
-        "password": "$2a$10$0N2d.IDmBvPfZWti7lMB4OMO1nIiDIGL17ZSKZwdOFr6yhyga0io2",
-        "role": "student",
-        "fullName": "John Doe",
-        "createdAt": "2024-12-06T20:08:11",
-        "updatedAt": null
-      },
-      "createdAt": "2024-12-14T17:11:18.93611",
       "questions": [],
-      "public": true
+      "public": true,
+      "question_bank_id": 1,
+      "bank_name": "Ngân hàng câu hỏi Toán",
+      "created_by": {
+        "email": "user@example.com",
+        "role": "student",
+        "user_id": 1,
+        "full_name": "John Doe 2",
+        "created_at": "2024-12-06T20:08:11",
+        "updated_at": "2024-12-15T10:37:16"
+      },
+      "is_public": true,
+      "created_at": "2024-12-14T17:11:18.93611"
     },
     {
-      "questionBankId": 2,
-      "bankName": "Ngân hàng câu hỏi Văn",
-      "createdBy": {
-        "userId": 1,
-        "email": "user@example.com",
-        "password": "$2a$10$0N2d.IDmBvPfZWti7lMB4OMO1nIiDIGL17ZSKZwdOFr6yhyga0io2",
-        "role": "student",
-        "fullName": "John Doe",
-        "createdAt": "2024-12-06T20:08:11",
-        "updatedAt": null
-      },
-      "createdAt": "2024-12-14T17:13:40.807487",
       "questions": [],
-      "public": true
+      "public": true,
+      "question_bank_id": 2,
+      "bank_name": "Ngân hàng câu hỏi Văn",
+      "created_by": {
+        "email": "user@example.com",
+        "role": "student",
+        "user_id": 1,
+        "full_name": "John Doe 2",
+        "created_at": "2024-12-06T20:08:11",
+        "updated_at": "2024-12-15T10:37:16"
+      },
+      "is_public": true,
+      "created_at": "2024-12-14T17:13:40.807487"
+    },
+    {
+      "questions": [],
+      "public": true,
+      "question_bank_id": 3,
+      "bank_name": "Ngân hàng câu hỏi địa",
+      "created_by": {
+        "email": "user@example.com",
+        "role": "student",
+        "user_id": 1,
+        "full_name": "John Doe 2",
+        "created_at": "2024-12-06T20:08:11",
+        "updated_at": "2024-12-15T10:37:16"
+      },
+      "is_public": true,
+      "created_at": "2024-12-14T17:21:02.517431"
     }
   ]
 }
@@ -254,22 +268,24 @@
 - Response:
 ```json
 {
-"questionBankId": 1,
-"bankName": "Ngân hàng câu hỏi Toán",
-"isPublic": true,
-"createdAt": "2024-01-01T12:00:00",
-"questions": [
-{
-"questionId": 101,
-"questionContent": "1 + 1 = ?",
-"correctAnswer": "2"
-},
-{
-"questionId": 102,
-"questionContent": "5 x 5 = ?",
-"correctAnswer": "25"
-}
-]
+  "code": 0,
+  "message": "Success",
+  "data": {
+    "questions": [],
+    "public": true,
+    "question_bank_id": 2,
+    "bank_name": "Ngân hàng câu hỏi Văn",
+    "created_by": {
+      "email": "user@example.com",
+      "role": "student",
+      "user_id": 1,
+      "full_name": "John Doe 2",
+      "created_at": "2024-12-06T20:08:11",
+      "updated_at": "2024-12-15T10:37:16"
+    },
+    "is_public": true,
+    "created_at": "2024-12-14T17:13:40.807487"
+  }
 }
 ```
 
@@ -288,3 +304,10 @@
 | GET    | `/api/subjects`       | Lấy danh sách tất cả môn học               |
 | GET    | `/api/subjects/{id}`  | Lấy thông tin chi tiết môn học theo ID     |
 
+### 5. API ExamAnswer
+
+| Method | URL                          | Description                                |
+|--------|------------------------------|--------------------------------------------|
+| POST   | `/api/results`               | Sinh viên nộp bài thi                      |
+| GET    | `/api/results/{id}`          | Lấy chi tiết kết quả làm bài               |
+| GET    | `/api/results/student/{id}`  | Lấy danh sách kết quả của sinh viên

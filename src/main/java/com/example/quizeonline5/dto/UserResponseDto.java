@@ -1,13 +1,20 @@
 package com.example.quizeonline5.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.time.LocalDateTime;
 
 public class UserResponseDto {
+    @JsonProperty("user_id")
     private Long userId;
     private String email;
     private String role;
+
+    @JsonProperty("full_name")
     private String fullName;
+    @JsonProperty("created_at")
     private LocalDateTime createdAt;
+    @JsonProperty("updated_at")
     private LocalDateTime updatedAt;
 
     // Getters and Setters
