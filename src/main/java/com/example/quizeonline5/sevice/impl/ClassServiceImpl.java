@@ -4,11 +4,13 @@ package com.example.quizeonline5.sevice.impl;
 import com.example.quizeonline5.dto.ApiResponse;
 import com.example.quizeonline5.dto.ClassDto;
 import com.example.quizeonline5.dto.StudentDto;
+import com.example.quizeonline5.entity.ClassStudent;
 import com.example.quizeonline5.entity.Classes;
 import com.example.quizeonline5.entity.Subject;
 import com.example.quizeonline5.entity.User;
 import com.example.quizeonline5.exception.ResourceNotFoundException;
 import com.example.quizeonline5.repository.ClassRepository;
+import com.example.quizeonline5.repository.ClassStudentRepository;
 import com.example.quizeonline5.repository.SubjectRepository;
 import com.example.quizeonline5.repository.UserRepository;
 import com.example.quizeonline5.sevice.ClassService;
@@ -24,6 +26,9 @@ import java.util.stream.Collectors;
 public class ClassServiceImpl implements ClassService {
     @Autowired
     private ClassRepository classRepository;
+
+    @Autowired
+    private ClassStudentRepository classStudentRepository;
 
     @Autowired
     private UserRepository userRepository;
@@ -82,6 +87,27 @@ public class ClassServiceImpl implements ClassService {
         classEntity.setTeacher(teacher);
         classEntity.setUpdatedAt(java.time.LocalDateTime.now());
         classRepository.save(classEntity);
+
+        // clear all students in class
+        List<ClassStudent> classStudents = classStudentRepository.findByClassEntityIs(classEntity);
+        if (classStudents != null) {
+            for (ClassStudent classStudent : classStudents) {
+                classStudentRepository.delete(classStudent);
+            }
+        }
+
+        // add new students to class
+        if (classDto.getStudents() != null) {
+            for (StudentDto std : classDto.getStudents()) {
+                Optional student = userRepository.findById(std.getStudentId());
+                if (student.isPresent()) {
+                    ClassStudent classStudent = new ClassStudent();
+                    classStudent.setClassEntity(classEntity);
+                    classStudent.setStudent((User) student.get());
+                    classStudentRepository.save(classStudent);
+                }
+            }
+        }
         return new ApiResponse(Boolean.TRUE, "Update class success");
     }
 
@@ -152,19 +178,5 @@ public class ClassServiceImpl implements ClassService {
 
         return new ApiResponse(true, "Student added to class successfully");
     }
-
-//    @Override
-//    public Map<String, Object> getTeacherDetailsInClass(Long classId) {
-//        Classes classEntity = classRepository.findById(classId)
-//                .orElseThrow(() -> new IllegalArgumentException("Class not found"));
-//
-//        User teacher = classEntity.getTeacher();
-//        return Map.of(
-//                "teacherId", teacher.getUserId(),
-//                "fullName", teacher.getFullName(),
-//                "email", teacher.getEmail(),
-//                "subjectName", classEntity.getSubject().getSubjectName()
-//        );
-//    }
 
 }

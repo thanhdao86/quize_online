@@ -9,20 +9,25 @@ import java.time.LocalDateTime;
 public class Question {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "question_id")
     @JsonProperty("question_id")
     private Long questionId;
 
-    @Column(nullable = false)
-    @JsonProperty("question_content")
+    @Column(name = "question_content")
+    @JsonProperty("question")
     private String questionContent;
 
-    @Column(nullable = false)
+    @Column(nullable = false,name = "answer")
+    @JsonProperty("answer")
+    private String answer;
+
+    @Column(nullable = false, name = "correct_answer")
     @JsonProperty("correct_answer")
     private String correctAnswer;
 
-    @ManyToOne
-    @JoinColumn(name = "bank_id", nullable = false)
-    @JsonProperty("question_bank")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "question_bank_id", nullable = false)
+    @JsonProperty("question_bank_id")
     private QuestionBank questionBank;
 
     @Column(name = "created_at")
@@ -33,8 +38,18 @@ public class Question {
     @JsonProperty("updated_at")
     private LocalDateTime updatedAt;
 
-    // Getters và Setters
+    public Question(Long questionId, String questionContent, String answer, String correctAnswer, QuestionBank questionBank, LocalDateTime createdAt, LocalDateTime updatedAt) {
+        this.questionId = questionId;
+        this.questionContent = questionContent;
+        this.answer = answer;
+        this.correctAnswer = correctAnswer;
+        this.questionBank = questionBank;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+    }
 
+    public Question() {
+    }
 
     public Long getQuestionId() {
         return questionId;
@@ -50,6 +65,14 @@ public class Question {
 
     public void setQuestionContent(String questionContent) {
         this.questionContent = questionContent;
+    }
+
+    public String getAnswer() {
+        return answer;
+    }
+
+    public void setAnswer(String answer) {
+        this.answer = answer;
     }
 
     public String getCorrectAnswer() {
@@ -81,18 +104,6 @@ public class Question {
     }
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
-        this.updatedAt = updatedAt;
-    }
-
-    public Question() {
-    }
-
-    public Question(Long questionId, String questionContent, String correctAnswer, QuestionBank questionBank, LocalDateTime createdAt, LocalDateTime updatedAt) {
-        this.questionId = questionId;
-        this.questionContent = questionContent;
-        this.correctAnswer = correctAnswer;
-        this.questionBank = questionBank;
-        this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
 }

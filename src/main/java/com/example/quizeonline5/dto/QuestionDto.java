@@ -3,13 +3,13 @@ package com.example.quizeonline5.dto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class QuestionDto {
-    @JsonProperty("question_content")
+    @JsonProperty("question")
     private String questionContent;
     @JsonProperty("answer")
     private String answer;
     @JsonProperty("correct_answer")
     private String correctAnswer;
-    @JsonProperty("bank_id")
+    @JsonProperty("question_bank_id")
     private Long bankId;
 
     public String getQuestionContent() {

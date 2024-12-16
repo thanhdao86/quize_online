@@ -51,6 +51,7 @@ public class ExamServiceImpl implements ExamService {
         exam.setCreatedBy(createdBy);
         exam.setDuration(examDto.getDuration());
         exam.setCreatedAt(LocalDateTime.now());
+        exam.setUpdatedAt(LocalDateTime.now());
 
         // Lưu Exam vào cơ sở dữ liệu
         exam = examRepository.save(exam);
@@ -69,5 +70,10 @@ public class ExamServiceImpl implements ExamService {
         }
 
         return exam.getExamId();
+    }
+
+    @Override
+    public List<Exam> getAllExams() {
+        return examRepository.findAll();
     }
 }

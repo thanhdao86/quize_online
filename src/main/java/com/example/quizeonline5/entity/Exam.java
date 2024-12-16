@@ -34,6 +34,10 @@ public class Exam {
     @JsonProperty("created_at")
     private LocalDateTime createdAt;
 
+    @Column(name = "updated_at")
+    @JsonProperty("updated_at")
+    private LocalDateTime updatedAt;
+
     @Column(nullable = false)
     private int duration; // Thời gian làm bài (phút)
 
@@ -106,5 +110,13 @@ public class Exam {
         this.createdBy = createdBy;
         this.createdAt = createdAt;
         this.duration = duration;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
     }
 }

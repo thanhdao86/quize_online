@@ -10,6 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 public class QuestionServiceImpl implements QuestionService {
@@ -28,6 +32,7 @@ public class QuestionServiceImpl implements QuestionService {
         // Tạo đối tượng Question mới
         Question question = new Question();
         question.setQuestionContent(questionDto.getQuestionContent());
+        question.setAnswer(questionDto.getAnswer());
         question.setCorrectAnswer(questionDto.getCorrectAnswer());
         question.setQuestionBank(questionBank);
         question.setCreatedAt(LocalDateTime.now());
@@ -35,5 +40,40 @@ public class QuestionServiceImpl implements QuestionService {
 
         // Lưu câu hỏi vào cơ sở dữ liệu
         return questionRepository.save(question).getQuestionId();
+    }
+
+    @Override
+    public List<Map<String, Object>>  getAllQuestion() {
+        return questionRepository.findAll()
+                .stream()
+                .map(question -> {
+                    Map<String, Object> map = new HashMap<>();
+                    map.put("question_id", question.getQuestionId());
+                    map.put("question", question.getQuestionContent());
+                    map.put("answer", question.getAnswer());
+                    map.put("correct_answer", question.getCorrectAnswer());
+                    map.put("question_bank_id", question.getQuestionBank().getQuestionBankId());
+                    map.put("created_at", question.getCreatedAt());
+                    map.put("updated_at", question.getUpdatedAt());
+                    return map;
+                }).collect(Collectors.toList());
+    }
+
+    @Override
+    public  List<Map<String, Object>>  getAllQuestion(Long bankId) {
+        return questionRepository.findAll()
+            .stream()
+            .filter(question -> question.getQuestionBank().getQuestionBankId().equals(bankId))
+            .map(question -> {
+                Map<String, Object> map = new HashMap<>();
+                map.put("question_id", question.getQuestionId());
+                map.put("question", question.getQuestionContent());
+                map.put("answer", question.getAnswer());
+                map.put("correct_answer", question.getCorrectAnswer());
+                map.put("question_bank_id", question.getQuestionBank().getQuestionBankId());
+                map.put("created_at", question.getCreatedAt());
+                map.put("updated_at", question.getUpdatedAt());
+                return map;
+            }).collect(Collectors.toList());
     }
 }

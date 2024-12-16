@@ -78,9 +78,15 @@ public class UserController {
         }
     }
 
-    @GetMapping("/teacher")
+    @GetMapping("/teachers")
     public ResponseEntity<?> getUsersWithRoleTeacher() {
         List<User> teachers = userService.getUsersByRole("teacher");
         return ResponseEntity.ok(CommonResponse.success(teachers));
+    }
+
+    @GetMapping("/students")
+    public ResponseEntity<?> getUsersWithRoleStudent() {
+        List<User> students = userService.getUsersByRole("student");
+        return ResponseEntity.ok(CommonResponse.success(students));
     }
 }
