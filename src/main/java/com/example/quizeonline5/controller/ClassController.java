@@ -69,7 +69,7 @@ public class ClassController {
     // get class student enroll
     @GetMapping("/students/{studentId}")
     public ResponseEntity<?> getAvailableClassesForStudent(@PathVariable Long studentId) {
-        List<ClassDto> availableClasses = classService.getEnrolledClassByStudent(studentId);
+        List<?> availableClasses = classService.getEnrolledClassByStudent(studentId);
         return new ResponseEntity<>(CommonResponse.success(availableClasses), HttpStatus.OK);
     }
 

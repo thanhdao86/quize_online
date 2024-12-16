@@ -1,9 +1,7 @@
 package com.example.quizeonline5.sevice.impl;
 
 
-import com.example.quizeonline5.dto.ApiResponse;
-import com.example.quizeonline5.dto.ClassDto;
-import com.example.quizeonline5.dto.StudentDto;
+import com.example.quizeonline5.dto.*;
 import com.example.quizeonline5.entity.ClassStudent;
 import com.example.quizeonline5.entity.Classes;
 import com.example.quizeonline5.entity.Subject;
@@ -48,7 +46,7 @@ public class ClassServiceImpl implements ClassService {
         User teacher = userRepository.findById(classDto.getTeacherId())
                 .orElseThrow(() -> new IllegalArgumentException("Teacher not found"));
 
-        Subject subject = subjectRepository.findById(1L)
+        Subject subject = subjectRepository.findById(classDto.getSubjectId())
                 .orElseThrow(() -> new IllegalArgumentException("Subject not found"));
 
         Classes classEntity = new Classes();
@@ -83,9 +81,13 @@ public class ClassServiceImpl implements ClassService {
         User teacher = userRepository.findById(classDto.getTeacherId())
                 .orElseThrow(() -> new IllegalArgumentException("Teacher not found"));
 
+        Subject subject = subjectRepository.findById(classDto.getSubjectId())
+                .orElseThrow(() -> new IllegalArgumentException("Subject not found"));
+
         classEntity.setClassName(classDto.getClassName());
         classEntity.setTeacher(teacher);
         classEntity.setUpdatedAt(java.time.LocalDateTime.now());
+        classEntity.setSubject(subject);
         classRepository.save(classEntity);
 
         // clear all students in class
@@ -194,7 +196,18 @@ public class ClassServiceImpl implements ClassService {
                     classDto.setClassId(classEntity.getClassId());
                     classDto.setClassName(classEntity.getClassName());
                     classDto.setSubjectId(classEntity.getSubject().getSubjectId());
-//                    classDto.setTeacher(classEntity.getTeacher());
+                    classDto.setCreatedAt(classEntity.getCreatedAt());
+
+                    UserDto userDto = new UserDto();
+                    userDto.setUserId(classEntity.getTeacher().getUserId());
+                    userDto.setFullName(classEntity.getTeacher().getFullName());
+                    userDto.setEmail(classEntity.getTeacher().getEmail());
+                    classDto.setTeacher(userDto);
+
+                    SubjectDto subjectDto = new SubjectDto();
+                    subjectDto.setSubjectName(classEntity.getSubject().getSubjectName());
+                    subjectDto.setDescription(classEntity.getSubject().getDescription());
+                    classDto.setSubject(subjectDto);
                     return classDto;
                 })
                 .collect(Collectors.toList());

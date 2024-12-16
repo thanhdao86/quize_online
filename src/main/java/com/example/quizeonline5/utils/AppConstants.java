@@ -1,5 +1,7 @@
 package com.example.quizeonline5.utils;
 
+import java.util.Map;
+
 public class AppConstants {
     public static final String DEFAULT_PAGE_NUMBER = "0";
 
@@ -30,4 +32,11 @@ public class AppConstants {
     public static final String SUBJECT = "Subject";
 
     public static final String YOU_DON_T_HAVE_PERMISSION_TO_MAKE_THIS_OPERATION = "You don't have permission to make this operation";
+
+    public static final Map<String, String> ENTITY_MAP = Map.of(
+            "1", "A",
+            "2", "B",
+            "3", "C",
+            "4", "D"
+    );
 }

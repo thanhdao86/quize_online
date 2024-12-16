@@ -110,18 +110,35 @@ public class ExamServiceImpl implements ExamService {
     }
 
     @Override
+    public List<Exam> getExamByClassId(Long classId) {
+        Classes classEntity = classRepository.findById(classId)
+                .orElseThrow(() -> new IllegalArgumentException("Class not found"));
+
+        return examRepository.findAll().stream()
+                .filter(exam -> exam.getClassEntity().getClassId().equals(classEntity.getClassId()))
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public void updateExam(Long examId, ExamDto examDto) {
         Exam exam = examRepository.findById(examId)
                 .orElseThrow(() -> new IllegalArgumentException("Exam not found"));
 
+        Classes classEntity = classRepository.findById(examDto.getClassId())
+                .orElseThrow(() -> new IllegalArgumentException("Class not found"));
+
         exam.setExamName(examDto.getExamName());
         exam.setDuration(examDto.getDuration());
+        exam.setClassEntity(classEntity);
         exam.setUpdatedAt(LocalDateTime.now());
 
         examRepository.save(exam);
-
-//        examQuestionRepository.deleteByExamId(examId);
-
+        List<ExamQuestion> examQuestions = examQuestionRepository.findByExam(exam);
+        if (examQuestions != null) {
+            for (ExamQuestion examQuestion : examQuestions) {
+                examQuestionRepository.delete(examQuestion);
+            }
+        }
         for (ExamQuestionDetailsDto questionDto : examDto.getQuestions()) {
             Question question = questionRepository.findById(questionDto.getQuestionId())
                     .orElseThrow(() -> new IllegalArgumentException("Question not found"));

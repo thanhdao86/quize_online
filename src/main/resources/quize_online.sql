@@ -11,7 +11,7 @@
  Target Server Version : 80039 (8.0.39)
  File Encoding         : 65001
 
- Date: 16/12/2024 09:20:27
+ Date: 17/12/2024 00:14:03
 */
 
 SET NAMES utf8mb4;
@@ -30,14 +30,19 @@ CREATE TABLE `class_students` (
   KEY `FKi67hsuppqm0qnfgn2x8d7v2lj` (`student_id`),
   CONSTRAINT `FKi67hsuppqm0qnfgn2x8d7v2lj` FOREIGN KEY (`student_id`) REFERENCES `users` (`user_id`),
   CONSTRAINT `FKjuh9br5vimkw71ko8qyswp3ci` FOREIGN KEY (`class_id`) REFERENCES `classes` (`class_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- ----------------------------
 -- Records of class_students
 -- ----------------------------
 BEGIN;
-INSERT INTO `class_students` (`id`, `class_id`, `student_id`) VALUES (6, 1, 1);
-INSERT INTO `class_students` (`id`, `class_id`, `student_id`) VALUES (7, 1, 3);
+INSERT INTO `class_students` (`id`, `class_id`, `student_id`) VALUES (34, 1, 15);
+INSERT INTO `class_students` (`id`, `class_id`, `student_id`) VALUES (35, 1, 14);
+INSERT INTO `class_students` (`id`, `class_id`, `student_id`) VALUES (36, 1, 16);
+INSERT INTO `class_students` (`id`, `class_id`, `student_id`) VALUES (37, 2, 16);
+INSERT INTO `class_students` (`id`, `class_id`, `student_id`) VALUES (38, 3, 16);
+INSERT INTO `class_students` (`id`, `class_id`, `student_id`) VALUES (39, 6, 18);
+INSERT INTO `class_students` (`id`, `class_id`, `student_id`) VALUES (40, 6, 20);
 COMMIT;
 
 -- ----------------------------
@@ -56,15 +61,18 @@ CREATE TABLE `classes` (
   KEY `fk21232` (`subject_id`),
   CONSTRAINT `fk21232` FOREIGN KEY (`subject_id`) REFERENCES `subjects` (`subject_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `FK4tv5efpqhlo8xg8l8dpba8v75` FOREIGN KEY (`teacher_id`) REFERENCES `users` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- ----------------------------
 -- Records of classes
 -- ----------------------------
 BEGIN;
-INSERT INTO `classes` (`class_id`, `class_name`, `subject_id`, `teacher_id`, `created_at`, `updated_at`) VALUES (1, 'Lop Moi', 1, 10, '2024-12-15 21:00:36', '2024-12-16 00:03:10');
-INSERT INTO `classes` (`class_id`, `class_name`, `subject_id`, `teacher_id`, `created_at`, `updated_at`) VALUES (2, 'Lop Moi', 1, 10, '2024-12-15 21:13:18', '2024-12-15 21:13:18');
-INSERT INTO `classes` (`class_id`, `class_name`, `subject_id`, `teacher_id`, `created_at`, `updated_at`) VALUES (3, 'Lop Moi', 1, 10, '2024-12-15 21:13:25', '2024-12-15 21:13:25');
+INSERT INTO `classes` (`class_id`, `class_name`, `subject_id`, `teacher_id`, `created_at`, `updated_at`) VALUES (1, '11A1 222B', 6, 17, '2024-12-15 21:00:36', '2024-12-16 22:27:10');
+INSERT INTO `classes` (`class_id`, `class_name`, `subject_id`, `teacher_id`, `created_at`, `updated_at`) VALUES (2, '11A2', 3, 10, '2024-12-15 21:13:18', '2024-12-16 22:27:14');
+INSERT INTO `classes` (`class_id`, `class_name`, `subject_id`, `teacher_id`, `created_at`, `updated_at`) VALUES (3, '11A3', 4, 10, '2024-12-15 21:13:25', '2024-12-16 22:27:19');
+INSERT INTO `classes` (`class_id`, `class_name`, `subject_id`, `teacher_id`, `created_at`, `updated_at`) VALUES (4, '12B2', 1, 10, '2024-12-16 22:07:11', '2024-12-16 22:07:11');
+INSERT INTO `classes` (`class_id`, `class_name`, `subject_id`, `teacher_id`, `created_at`, `updated_at`) VALUES (5, 'Lop Moi toanh 123123', 4, 10, '2024-12-16 22:16:56', '2024-12-16 22:26:59');
+INSERT INTO `classes` (`class_id`, `class_name`, `subject_id`, `teacher_id`, `created_at`, `updated_at`) VALUES (6, 'Hoa dai cuong 1', 8, 19, '2024-12-16 22:46:06', '2024-12-16 22:49:23');
 COMMIT;
 
 -- ----------------------------
@@ -73,7 +81,6 @@ COMMIT;
 DROP TABLE IF EXISTS `exam_questions`;
 CREATE TABLE `exam_questions` (
   `id` bigint NOT NULL AUTO_INCREMENT,
-  `point` int NOT NULL,
   `exam_id` bigint NOT NULL,
   `question_id` bigint NOT NULL,
   PRIMARY KEY (`id`),
@@ -81,14 +88,12 @@ CREATE TABLE `exam_questions` (
   KEY `FKs0t1710in6q97whp93ggrs1wg` (`question_id`),
   CONSTRAINT `FK5cd6sjmccb11rrwpyabyc81c0` FOREIGN KEY (`exam_id`) REFERENCES `exams` (`exam_id`),
   CONSTRAINT `FKs0t1710in6q97whp93ggrs1wg` FOREIGN KEY (`question_id`) REFERENCES `questions` (`question_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- ----------------------------
 -- Records of exam_questions
 -- ----------------------------
 BEGIN;
-INSERT INTO `exam_questions` (`id`, `point`, `exam_id`, `question_id`) VALUES (1, 0, 2, 1);
-INSERT INTO `exam_questions` (`id`, `point`, `exam_id`, `question_id`) VALUES (2, 0, 2, 2);
 COMMIT;
 
 -- ----------------------------
@@ -96,14 +101,18 @@ COMMIT;
 -- ----------------------------
 DROP TABLE IF EXISTS `exam_results`;
 CREATE TABLE `exam_results` (
-  `result_id` int NOT NULL AUTO_INCREMENT,
-  `user_id` int NOT NULL,
-  `exam_id` int NOT NULL,
+  `result_id` bigint NOT NULL AUTO_INCREMENT,
+  `user_id` bigint NOT NULL,
+  `exam_id` bigint NOT NULL,
   `score` int DEFAULT NULL,
   `submitted_at` datetime NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`result_id`) USING BTREE
+  PRIMARY KEY (`result_id`) USING BTREE,
+  KEY `FKtf85ht7yquiorwjx2xbdx3fxw` (`exam_id`),
+  KEY `FKt2jcn29o332cpiv7s7h3o877e` (`user_id`),
+  CONSTRAINT `FKt2jcn29o332cpiv7s7h3o877e` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`),
+  CONSTRAINT `FKtf85ht7yquiorwjx2xbdx3fxw` FOREIGN KEY (`exam_id`) REFERENCES `exams` (`exam_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- ----------------------------
@@ -133,32 +142,16 @@ CREATE TABLE `exams` (
   CONSTRAINT `FKa9pp7fvh0i6302peis1x76ots` FOREIGN KEY (`created_by`) REFERENCES `users` (`user_id`),
   CONSTRAINT `FKkq9895f263nw6qxibikek0t40` FOREIGN KEY (`class_id`) REFERENCES `classes` (`class_id`),
   CONSTRAINT `FKopre4n7j7fpxqbtbwpv8ywn1y` FOREIGN KEY (`subject_id`) REFERENCES `subjects` (`subject_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- ----------------------------
 -- Records of exams
 -- ----------------------------
 BEGIN;
-INSERT INTO `exams` (`exam_id`, `exam_name`, `subject_id`, `class_id`, `created_by`, `duration`, `created_at`, `updated_at`) VALUES (1, 'exam 1', 3, 1, 6, 1, '2024-12-15 21:27:43', '2024-12-15 21:27:43');
-INSERT INTO `exams` (`exam_id`, `exam_name`, `subject_id`, `class_id`, `created_by`, `duration`, `created_at`, `updated_at`) VALUES (2, 'Bai thi 1', 4, 2, 6, 30, '2024-12-15 22:10:45', '2024-12-15 22:10:45');
-COMMIT;
-
--- ----------------------------
--- Table structure for map_question_and_exam
--- ----------------------------
-DROP TABLE IF EXISTS `map_question_and_exam`;
-CREATE TABLE `map_question_and_exam` (
-  `exam_id` int NOT NULL,
-  `question_id` int NOT NULL,
-  `point` int NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NOT NULL ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- ----------------------------
--- Records of map_question_and_exam
--- ----------------------------
-BEGIN;
+INSERT INTO `exams` (`exam_id`, `exam_name`, `subject_id`, `class_id`, `created_by`, `duration`, `created_at`, `updated_at`) VALUES (1, 'exam 12', 3, 1, 6, 1, '2024-12-15 21:27:43', '2024-12-16 20:35:27');
+INSERT INTO `exams` (`exam_id`, `exam_name`, `subject_id`, `class_id`, `created_by`, `duration`, `created_at`, `updated_at`) VALUES (2, 'Bai thi 1', 4, 1, 6, 30, '2024-12-15 22:10:45', '2024-12-16 19:59:59');
+INSERT INTO `exams` (`exam_id`, `exam_name`, `subject_id`, `class_id`, `created_by`, `duration`, `created_at`, `updated_at`) VALUES (3, 'TK Exam', 9, 2, 6, 30, '2024-12-16 22:51:47', '2024-12-16 22:51:47');
+INSERT INTO `exams` (`exam_id`, `exam_name`, `subject_id`, `class_id`, `created_by`, `duration`, `created_at`, `updated_at`) VALUES (4, 'Kiem tra hoa', 8, 6, 6, 1, '2024-12-16 22:55:56', '2024-12-16 22:58:18');
 COMMIT;
 
 -- ----------------------------
@@ -174,16 +167,17 @@ CREATE TABLE `question_banks` (
   PRIMARY KEY (`question_bank_id`),
   KEY `FKaoc8pganxt0sge51oqvc5oqcp` (`created_by`),
   CONSTRAINT `FKaoc8pganxt0sge51oqvc5oqcp` FOREIGN KEY (`created_by`) REFERENCES `users` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- ----------------------------
 -- Records of question_banks
 -- ----------------------------
 BEGIN;
-INSERT INTO `question_banks` (`question_bank_id`, `bank_name`, `created_at`, `is_public`, `created_by`) VALUES (1, 'Ngân hàng câu hỏi Toán', '2024-12-14 17:11:18.936110', b'1', 1);
-INSERT INTO `question_banks` (`question_bank_id`, `bank_name`, `created_at`, `is_public`, `created_by`) VALUES (2, 'Ngân hàng câu hỏi Văn', '2024-12-14 17:13:40.807487', b'1', 1);
-INSERT INTO `question_banks` (`question_bank_id`, `bank_name`, `created_at`, `is_public`, `created_by`) VALUES (3, 'Ngân hàng câu hỏi địa', '2024-12-14 17:21:02.517431', b'1', 1);
+INSERT INTO `question_banks` (`question_bank_id`, `bank_name`, `created_at`, `is_public`, `created_by`) VALUES (1, 'Ngân hàng câu hỏi Toán', '2024-12-14 17:11:18.936110', b'1', 6);
+INSERT INTO `question_banks` (`question_bank_id`, `bank_name`, `created_at`, `is_public`, `created_by`) VALUES (2, 'Ngân hàng câu hỏi Văn', '2024-12-14 17:13:40.807487', b'1', 6);
+INSERT INTO `question_banks` (`question_bank_id`, `bank_name`, `created_at`, `is_public`, `created_by`) VALUES (3, 'Ngân hàng câu hỏi địa', '2024-12-14 17:21:02.517431', b'1', 6);
 INSERT INTO `question_banks` (`question_bank_id`, `bank_name`, `created_at`, `is_public`, `created_by`) VALUES (4, 'niu', '2024-12-15 21:01:20.754973', b'0', 6);
+INSERT INTO `question_banks` (`question_bank_id`, `bank_name`, `created_at`, `is_public`, `created_by`) VALUES (7, 'Ngân hàng câu hỏi Hoá', '2024-12-16 22:46:31.246793', b'0', 6);
 COMMIT;
 
 -- ----------------------------
@@ -201,14 +195,27 @@ CREATE TABLE `questions` (
   PRIMARY KEY (`question_id`) USING BTREE,
   KEY `FK001` (`question_bank_id`),
   CONSTRAINT `FK001` FOREIGN KEY (`question_bank_id`) REFERENCES `question_banks` (`question_bank_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of questions
 -- ----------------------------
 BEGIN;
-INSERT INTO `questions` (`question_id`, `question_content`, `answer`, `correct_answer`, `question_bank_id`, `created_at`, `updated_at`) VALUES (1, '1 + 1 = ?', '[\"1\",\"2\",\"3\",\"4\"]', '1', 1, '2024-12-15 23:06:08', '2024-12-15 23:06:08');
-INSERT INTO `questions` (`question_id`, `question_content`, `answer`, `correct_answer`, `question_bank_id`, `created_at`, `updated_at`) VALUES (2, '2 + 2 =  ?', '[\"1\",\"2\",\"3\",\"4\",\"5\",\"6\"]', '4', 1, '2024-12-15 23:07:08', '2024-12-15 23:07:08');
+INSERT INTO `questions` (`question_id`, `question_content`, `answer`, `correct_answer`, `question_bank_id`, `created_at`, `updated_at`) VALUES (34, 'When I last saw him, he _____ in London.', '[{\"key\":\"A\",\"value\":\"has lived\"},{\"key\":\"B\",\"value\":\"is living\"},{\"key\":\"C\",\"value\":\"was living\"},{\"key\":\"D\",\"value\":\"has been living\"}]', 'C', 7, '2024-12-17 00:10:54', '2024-12-17 00:10:54');
+INSERT INTO `questions` (`question_id`, `question_content`, `answer`, `correct_answer`, `question_bank_id`, `created_at`, `updated_at`) VALUES (35, 'We _______ Dorothy since last Saturday.', '[{\"key\":\"A\",\"value\":\"don’t see\"},{\"key\":\"B\",\"value\":\"haven’t seen\"},{\"key\":\"C\",\"value\":\"didn’t see\"},{\"key\":\"D\",\"value\":\"hadn’t seen\"}]', 'B', 7, '2024-12-17 00:12:02', '2024-12-17 00:12:02');
+INSERT INTO `questions` (`question_id`, `question_content`, `answer`, `correct_answer`, `question_bank_id`, `created_at`, `updated_at`) VALUES (36, 'The train ______ half an hour ago.', '[{\"key\":\"A\",\"value\":\"has been leaving\"},{\"key\":\"B\",\"value\":\"left\"},{\"key\":\"C\",\"value\":\"has left\"},{\"key\":\"D\",\"value\":\"had left\"}]', 'B', 7, '2024-12-17 00:12:10', '2024-12-17 00:12:10');
+INSERT INTO `questions` (`question_id`, `question_content`, `answer`, `correct_answer`, `question_bank_id`, `created_at`, `updated_at`) VALUES (37, 'Jack ______ the door.', '[{\"key\":\"A\",\"value\":\"has just painted\"},{\"key\":\"B\",\"value\":\"paint\"},{\"key\":\"C\",\"value\":\"will have painted\"},{\"key\":\"D\",\"value\":\"painting\"}]', 'A', 7, '2024-12-17 00:12:10', '2024-12-17 00:12:10');
+INSERT INTO `questions` (`question_id`, `question_content`, `answer`, `correct_answer`, `question_bank_id`, `created_at`, `updated_at`) VALUES (38, 'My sister ________ for you since yesterday', '[{\"key\":\"A\",\"value\":\"is looking\"},{\"key\":\"B\",\"value\":\"was looking\"},{\"key\":\"C\",\"value\":\"has been looking\"},{\"key\":\"D\",\"value\":\"looked\"}]', 'C', 7, '2024-12-17 00:12:10', '2024-12-17 00:12:10');
+INSERT INTO `questions` (`question_id`, `question_content`, `answer`, `correct_answer`, `question_bank_id`, `created_at`, `updated_at`) VALUES (39, 'I ______ Texas State University now', '[{\"key\":\"A\",\"value\":\"am attending\"},{\"key\":\"B\",\"value\":\"attend\"},{\"key\":\"C\",\"value\":\"was attending\"},{\"key\":\"D\",\"value\":\"attended\"}]', 'A', 7, '2024-12-17 00:12:10', '2024-12-17 00:12:10');
+INSERT INTO `questions` (`question_id`, `question_content`, `answer`, `correct_answer`, `question_bank_id`, `created_at`, `updated_at`) VALUES (40, 'He has been selling motorbikes ________', '[{\"key\":\"A\",\"value\":\"ten years ago\"},{\"key\":\"B\",\"value\":\"since ten years\"},{\"key\":\"C\",\"value\":\"for ten years ago\"},{\"key\":\"D\",\"value\":\"for ten years\"}]', 'D', 7, '2024-12-17 00:12:10', '2024-12-17 00:12:10');
+INSERT INTO `questions` (`question_id`, `question_content`, `answer`, `correct_answer`, `question_bank_id`, `created_at`, `updated_at`) VALUES (41, 'Christopher Columbus _______ American more than 500 years ago', '[{\"key\":\"A\",\"value\":\"discovered\"},{\"key\":\"B\",\"value\":\"has discovered\"},{\"key\":\"C\",\"value\":\"had discovered\"},{\"key\":\"D\",\"value\":\"had been discovering\"}]', 'A', 7, '2024-12-17 00:12:10', '2024-12-17 00:12:10');
+INSERT INTO `questions` (`question_id`, `question_content`, `answer`, `correct_answer`, `question_bank_id`, `created_at`, `updated_at`) VALUES (42, 'He fell down when he ______ towards the church', '[{\"key\":\"A\",\"value\":\"run\"},{\"key\":\"B\",\"value\":\"runs\"},{\"key\":\"C\",\"value\":\"was running\"},{\"key\":\"D\",\"value\":\"had run\"}]', 'C', 7, '2024-12-17 00:12:10', '2024-12-17 00:12:10');
+INSERT INTO `questions` (`question_id`, `question_content`, `answer`, `correct_answer`, `question_bank_id`, `created_at`, `updated_at`) VALUES (43, 'We _______ there when our father died', '[{\"key\":\"A\",\"value\":\"still lived\"},{\"key\":\"B\",\"value\":\"lived still\"},{\"key\":\"C\",\"value\":\"was still lived\"},{\"key\":\"D\",\"value\":\"was still living\"}]', 'A', 7, '2024-12-17 00:12:10', '2024-12-17 00:12:10');
+INSERT INTO `questions` (`question_id`, `question_content`, `answer`, `correct_answer`, `question_bank_id`, `created_at`, `updated_at`) VALUES (44, 'They ______ table tennis when their father comes back home', '[{\"key\":\"A\",\"value\":\"will play\"},{\"key\":\"B\",\"value\":\"will be playing\"},{\"key\":\"C\",\"value\":\"play\"},{\"key\":\"D\",\"value\":\"would play\"}]', 'B', 7, '2024-12-17 00:12:10', '2024-12-17 00:12:10');
+INSERT INTO `questions` (`question_id`, `question_content`, `answer`, `correct_answer`, `question_bank_id`, `created_at`, `updated_at`) VALUES (45, 'By Christmas, I _______ for Mr. Smith for six years', '[{\"key\":\"A\",\"value\":\"will have been working\"},{\"key\":\"B\",\"value\":\"will work\"},{\"key\":\"C\",\"value\":\"have been working\"},{\"key\":\"D\",\"value\":\"will be working\"}]', 'A', 7, '2024-12-17 00:12:10', '2024-12-17 00:12:10');
+INSERT INTO `questions` (`question_id`, `question_content`, `answer`, `correct_answer`, `question_bank_id`, `created_at`, `updated_at`) VALUES (46, 'I _______ in the room right now', '[{\"key\":\"A\",\"value\":\"am being\"},{\"key\":\"B\",\"value\":\"was being\"},{\"key\":\"C\",\"value\":\"have been being\"},{\"key\":\"D\",\"value\":\"am\"}]', 'D', 7, '2024-12-17 00:12:10', '2024-12-17 00:12:10');
+INSERT INTO `questions` (`question_id`, `question_content`, `answer`, `correct_answer`, `question_bank_id`, `created_at`, `updated_at`) VALUES (47, 'I ______ to New York three times this year', '[{\"key\":\"A\",\"value\":\"have been\"},{\"key\":\"B\",\"value\":\"was\"},{\"key\":\"C\",\"value\":\"were\"},{\"key\":\"D\",\"value\":\"had been\"}]', 'A', 7, '2024-12-17 00:12:10', '2024-12-17 00:12:10');
+INSERT INTO `questions` (`question_id`, `question_content`, `answer`, `correct_answer`, `question_bank_id`, `created_at`, `updated_at`) VALUES (48, 'I’ll come and see you before I _______ for the States', '[{\"key\":\"A\",\"value\":\"leave\"},{\"key\":\"B\",\"value\":\"will leave\"},{\"key\":\"C\",\"value\":\"have left\"},{\"key\":\"D\",\"value\":\"shall leave\"}]', 'A', 7, '2024-12-17 00:12:10', '2024-12-17 00:12:10');
 COMMIT;
 
 -- ----------------------------
@@ -226,7 +233,7 @@ CREATE TABLE `result_answers` (
   KEY `FKuutyw4sxufhj2y5m7xp3grpv` (`result_id`),
   CONSTRAINT `FKqaieyg9kc7p3wdjd3x8fberwq` FOREIGN KEY (`question_id`) REFERENCES `questions` (`question_id`),
   CONSTRAINT `FKuutyw4sxufhj2y5m7xp3grpv` FOREIGN KEY (`result_id`) REFERENCES `results` (`result_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- ----------------------------
 -- Records of result_answers
@@ -249,12 +256,16 @@ CREATE TABLE `results` (
   KEY `FKxtl9ahma532if6r68yvgo7ck` (`user_id`),
   CONSTRAINT `FKeow9kom5hrbhv6jhq82bqe68k` FOREIGN KEY (`exam_id`) REFERENCES `exams` (`exam_id`),
   CONSTRAINT `FKxtl9ahma532if6r68yvgo7ck` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- ----------------------------
 -- Records of results
 -- ----------------------------
 BEGIN;
+INSERT INTO `results` (`result_id`, `score`, `submitted_at`, `exam_id`, `user_id`) VALUES (1, 2, '2024-12-16 20:37:21.642446', 1, 16);
+INSERT INTO `results` (`result_id`, `score`, `submitted_at`, `exam_id`, `user_id`) VALUES (2, 0, '2024-12-16 22:08:04.782756', 1, 16);
+INSERT INTO `results` (`result_id`, `score`, `submitted_at`, `exam_id`, `user_id`) VALUES (3, 1, '2024-12-16 22:58:29.507500', 4, 20);
+INSERT INTO `results` (`result_id`, `score`, `submitted_at`, `exam_id`, `user_id`) VALUES (4, 1, '2024-12-16 22:58:39.218650', 4, 20);
 COMMIT;
 
 -- ----------------------------
@@ -288,18 +299,20 @@ CREATE TABLE `subjects` (
   `subject_name` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
   `updated_at` datetime(6) DEFAULT NULL,
   PRIMARY KEY (`subject_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- ----------------------------
 -- Records of subjects
 -- ----------------------------
 BEGIN;
-INSERT INTO `subjects` (`subject_id`, `created_at`, `description`, `subject_name`, `updated_at`) VALUES (1, NULL, 'IT 2024', 'CNTT2 123123', '2024-12-15 11:36:04.395662');
-INSERT INTO `subjects` (`subject_id`, `created_at`, `description`, `subject_name`, `updated_at`) VALUES (2, NULL, '123123123', 'CNTT 22123123123', '2024-12-15 11:36:11.949030');
+INSERT INTO `subjects` (`subject_id`, `created_at`, `description`, `subject_name`, `updated_at`) VALUES (1, NULL, 'IT 2024', 'CNTT', '2024-12-16 20:00:22.659812');
+INSERT INTO `subjects` (`subject_id`, `created_at`, `description`, `subject_name`, `updated_at`) VALUES (2, NULL, '123123123', 'Toan 2', '2024-12-16 20:00:27.383951');
 INSERT INTO `subjects` (`subject_id`, `created_at`, `description`, `subject_name`, `updated_at`) VALUES (3, '2024-12-15 11:35:01.744690', 'OOPPPP', 'OOP', '2024-12-15 11:35:01.744705');
 INSERT INTO `subjects` (`subject_id`, `created_at`, `description`, `subject_name`, `updated_at`) VALUES (4, '2024-12-15 21:09:23.034334', 'Môn Toán', 'Toán', '2024-12-15 21:09:23.034352');
 INSERT INTO `subjects` (`subject_id`, `created_at`, `description`, `subject_name`, `updated_at`) VALUES (5, '2024-12-15 21:09:49.365559', 'Môn Văn', 'Văn', '2024-12-15 21:09:49.365593');
 INSERT INTO `subjects` (`subject_id`, `created_at`, `description`, `subject_name`, `updated_at`) VALUES (6, '2024-12-15 22:31:23.365211', 'Lý 2024', 'Lý ĐC', '2024-12-15 22:31:23.365231');
+INSERT INTO `subjects` (`subject_id`, `created_at`, `description`, `subject_name`, `updated_at`) VALUES (8, '2024-12-16 22:45:47.785099', 'Hoa hoc dai cuong', 'Hoa ', '2024-12-16 22:45:47.785117');
+INSERT INTO `subjects` (`subject_id`, `created_at`, `description`, `subject_name`, `updated_at`) VALUES (9, '2024-12-16 22:46:58.460364', 'TK Description', 'TK Subject', '2024-12-16 22:46:58.460492');
 COMMIT;
 
 -- ----------------------------
@@ -316,27 +329,22 @@ CREATE TABLE `users` (
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`user_id`) USING BTREE,
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- ----------------------------
 -- Records of users
 -- ----------------------------
 BEGIN;
-INSERT INTO `users` (`user_id`, `email`, `password`, `role`, `full_name`, `created_at`, `updated_at`) VALUES (1, 'user@example.com', '$2a$10$0N2d.IDmBvPfZWti7lMB4OMO1nIiDIGL17ZSKZwdOFr6yhyga0io2', 'student', 'John Doe 2', '2024-12-06 20:08:11', '2024-12-15 10:37:16');
-INSERT INTO `users` (`user_id`, `email`, `password`, `role`, `full_name`, `created_at`, `updated_at`) VALUES (3, 'user2@example.com', '$2a$10$3WtbJENJfIyBkowbrJkaT.xpTiK0EZI.bLm6kQInpaigR4jhGvnza', 'student', 'John Doe 3', '2024-12-06 20:09:03', '2024-12-15 10:38:03');
-INSERT INTO `users` (`user_id`, `email`, `password`, `role`, `full_name`, `created_at`, `updated_at`) VALUES (4, 'user3@example.com', '$2a$10$T57rs1AOgP2B/Lk..aBb3uXMf3MetEgPuaaU6Loor9WxK4o/IXjXS', 'student', 'peter', '2024-12-06 22:01:11', '2024-12-15 10:38:37');
-INSERT INTO `users` (`user_id`, `email`, `password`, `role`, `full_name`, `created_at`, `updated_at`) VALUES (5, 'admin2@example.com', 'acf4b61ea50a85e5326b0649476dbc24:425a018ecdf2460c3334f55aec754a9c92ccdc54537a04a96ed17401fe8dc425', 'admin', 'Administrator', '2024-12-15 09:35:04', '2024-12-15 09:35:04');
 INSERT INTO `users` (`user_id`, `email`, `password`, `role`, `full_name`, `created_at`, `updated_at`) VALUES (6, 'tk@example.com', '5cfda047b5444471d6e9b36b77daf33b:47d35763ef8e403bd1bdadc4bd506a63c488805e73a2c58be250c2759c8b01da', 'admin', 'TK', '2024-12-15 09:37:04', '2024-12-15 09:37:04');
-INSERT INTO `users` (`user_id`, `email`, `password`, `role`, `full_name`, `created_at`, `updated_at`) VALUES (7, 'student1@zz.zz', '1f6ffdadc5db5e18d2d876e8be21cc08:58b25a2e18990f74c8578dd9fcd152cda16414aa647208f7aeba4d5b482be578', 'student', 'test', '2024-12-15 10:17:39', '2024-12-15 10:17:39');
-INSERT INTO `users` (`user_id`, `email`, `password`, `role`, `full_name`, `created_at`, `updated_at`) VALUES (8, 'zz@zz.zzz', '65b124dadda2941edf7b717e4d385461:127a2a6d351fb40e47dc17a8e92ce05744d49c971ad5b08d77ae57d4bdf95006', 'student', 'test', '2024-12-15 10:22:45', '2024-12-15 10:22:45');
-INSERT INTO `users` (`user_id`, `email`, `password`, `role`, `full_name`, `created_at`, `updated_at`) VALUES (9, 'test2@zz.zz', '1a79ba17b32c2991ee592f4c8ef85866:ec59a97ceb710369a58008117a48f46de3d84ebab011f29b56297a9271a85829', 'student', '213', '2024-12-15 10:27:47', '2024-12-15 10:27:47');
 INSERT INTO `users` (`user_id`, `email`, `password`, `role`, `full_name`, `created_at`, `updated_at`) VALUES (10, 'hihih@zz.zzz', '4d14e27c0d45785b77d271f11213230a:fb7f7dc56b7eab4888e62ff454c82a4edf0e1454b40e788434df20da26595d90', 'teacher', 'teacher 12', '2024-12-15 10:29:52', '2024-12-15 23:19:34');
-INSERT INTO `users` (`user_id`, `email`, `password`, `role`, `full_name`, `created_at`, `updated_at`) VALUES (11, 'hihii@mm.zzz', 'a14e2d2a30745b4b143272609dee9c93:cba1c30a53406777da266f18a205c0762d5bd20128ecff5970e1af65fe8ed056', 'student', 'Peter parker', '2024-12-15 10:50:25', '2024-12-15 10:50:43');
-INSERT INTO `users` (`user_id`, `email`, `password`, `role`, `full_name`, `created_at`, `updated_at`) VALUES (12, 'hihih@zzz.xxzzz', '32ebd3b19de4212ab1ff33d2a911b3d5:70bdffe3d08634aed9a504670db576f3f26c9108f0a11bdd2bd17d23e67d185d', 'student', '123213 adadadadad', '2024-12-15 11:28:48', '2024-12-15 11:28:59');
-INSERT INTO `users` (`user_id`, `email`, `password`, `role`, `full_name`, `created_at`, `updated_at`) VALUES (13, 'niuniu@zz.zshd', '4921c57dc27bceaa888db90382d17a19:e220f9d19b37e0b5a043ba6b2323d1e233635c5b1f9a12baeacfde7dd11c6dd6', 'student', '21342 adad', '2024-12-15 11:31:16', '2024-12-15 11:31:16');
 INSERT INTO `users` (`user_id`, `email`, `password`, `role`, `full_name`, `created_at`, `updated_at`) VALUES (14, 's1@zz.zz', '17ce8748638e5cd25bf2120a0a402edb:f18581c8a6717aeeebd58b3f0d869e827b54780d1538e0d50b4aa17be3a294df', 'student', 'S1', '2024-12-15 23:18:47', '2024-12-15 23:18:47');
 INSERT INTO `users` (`user_id`, `email`, `password`, `role`, `full_name`, `created_at`, `updated_at`) VALUES (15, 's2@zz.zz', 'c797519506f1bdcf2dc25debcbda0f82:108c8965b8a54df069a703ac97f785a859a4e9c5a20bdd2ba9453a57ba15b821', 'student', 'S2', '2024-12-15 23:18:56', '2024-12-15 23:18:56');
 INSERT INTO `users` (`user_id`, `email`, `password`, `role`, `full_name`, `created_at`, `updated_at`) VALUES (16, 's3@zz.zz', '27662988a48a6efb341f2e8f404cdd2a:103e08c6c3cf1c8bb49a5a0f4fc5a13c82dc53c07e1905727d1a293a28fb616e', 'student', 'S3', '2024-12-15 23:19:07', '2024-12-15 23:19:07');
+INSERT INTO `users` (`user_id`, `email`, `password`, `role`, `full_name`, `created_at`, `updated_at`) VALUES (17, 'teacherdz@zz.zz', '514e36c9b229207fb432f9f7cc581205:91eb5ba66111d984ade583b165e20423ae21d51f694fa5bc5cd5e11e9f2ea154', 'teacher', 'Teacher 2023', '2024-12-16 20:02:27', '2024-12-16 22:38:24');
+INSERT INTO `users` (`user_id`, `email`, `password`, `role`, `full_name`, `created_at`, `updated_at`) VALUES (18, 'tung@ac.com', '9654a642a78c59c126cf70918439e523:88d9c5debcfd755ef8856d89cdc0fb980d7eded20cc4a3824b7f5783694b10ea', 'student', 'phamj thanh tung', '2024-12-16 22:38:49', '2024-12-16 22:39:45');
+INSERT INTO `users` (`user_id`, `email`, `password`, `role`, `full_name`, `created_at`, `updated_at`) VALUES (19, 'hoa@gmail.com', '8b5b93d25ef8671beb1c9e0d2e9607df:f8df2dd7189aac92840f81cde00cec87eaf6e0b88912af399151bf2140e67aef', 'teacher', 'hoa hoc ', '2024-12-16 22:42:04', '2024-12-16 22:43:00');
+INSERT INTO `users` (`user_id`, `email`, `password`, `role`, `full_name`, `created_at`, `updated_at`) VALUES (20, 'tung@gmail.com', '5da8c7ffb50ab3c20960815d3f95374f:524a675fd5a09a11d5f3ef9e3517ac677873354dda78a03ad76bc96d66a093d7', 'student', 'phamj thanh ', '2024-12-16 22:43:37', '2024-12-16 22:43:47');
+INSERT INTO `users` (`user_id`, `email`, `password`, `role`, `full_name`, `created_at`, `updated_at`) VALUES (21, 'tk_1@gmail.com', 'c0c6e174ce07188cf07d19ef495cf27a:98e9baa4ff6efc02e5cc4f5c428970df5b850d49aa76b329999d9e0732c75c5c', 'teacher', 'TK Teacher', '2024-12-16 22:45:40', '2024-12-16 22:45:40');
 COMMIT;
 
 SET FOREIGN_KEY_CHECKS = 1;

@@ -1,9 +1,12 @@
 package com.example.quizeonline5.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Data;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
+@Data
 public class ClassDto {
     @JsonProperty("class_id")
     Number classId;
@@ -22,6 +25,11 @@ public class ClassDto {
 
     @JsonProperty("teacher")
     private UserDto teacher;
+
+    SubjectDto subject;
+
+    @JsonProperty("created_at")
+    private LocalDateTime createdAt;
 
     public UserDto getTeacher() {
         return teacher;
@@ -67,4 +75,15 @@ public class ClassDto {
         return students;
     }
 
+    public void setStudents(List<StudentDto> students) {
+        this.students = students;
+    }
+
+    public SubjectDto getSubject() {
+        return subject;
+    }
+
+    public void setSubject(SubjectDto subject) {
+        this.subject = subject;
+    }
 }

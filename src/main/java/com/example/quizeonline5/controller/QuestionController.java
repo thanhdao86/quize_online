@@ -2,7 +2,9 @@ package com.example.quizeonline5.controller;
 
 import com.example.quizeonline5.dto.CommonResponse;
 import com.example.quizeonline5.dto.QuestionDto;
+import com.example.quizeonline5.dto.QuestionUploadDto;
 import com.example.quizeonline5.sevice.QuestionService;
+import com.example.quizeonline5.sevice.QuestionUploadService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +15,10 @@ import org.springframework.web.bind.annotation.*;
 public class QuestionController {
     @Autowired
     private QuestionService questionService;
+
+    @Autowired
+    private QuestionUploadService questionUploadService;
+
 
     @PostMapping
     public ResponseEntity<?> addQuestionToBank(@RequestBody QuestionDto questionDto) {
@@ -28,5 +34,11 @@ public class QuestionController {
     @GetMapping(path = "/banks/{bankId}")
     public ResponseEntity<?> getAllQuestionByBankId(@PathVariable Long bankId) {
         return new ResponseEntity< >(CommonResponse.success(questionService.getAllQuestion(bankId)), HttpStatus.OK);
+    }
+
+    @PostMapping("/upload")
+    public ResponseEntity<?> uploadQuestions(@RequestBody QuestionUploadDto uploadDto) {
+        questionUploadService.uploadQuestions(uploadDto);
+        return ResponseEntity.ok("Questions uploaded successfully.");
     }
 }

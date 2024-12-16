@@ -39,4 +39,9 @@ public class ExamController {
     public ResponseEntity<?> getExamDetails(@PathVariable Long examId) {
         return new ResponseEntity< >(CommonResponse.success(examService.getExamDetails(examId)), HttpStatus.OK);
     }
+
+    @GetMapping("/class/{classId}")
+    public ResponseEntity<?> getExamDetailByClassId(@PathVariable Long classId) {
+        return new ResponseEntity< >(CommonResponse.success(examService.getExamByClassId(classId)), HttpStatus.OK);
+    }
 }
