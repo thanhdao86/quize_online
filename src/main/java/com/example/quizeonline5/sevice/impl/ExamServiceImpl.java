@@ -2,6 +2,7 @@ package com.example.quizeonline5.sevice.impl;
 
 import com.example.quizeonline5.dto.ExamDto;
 import com.example.quizeonline5.dto.ExamQuestionDto;
+import com.example.quizeonline5.dto.ExamQuestionDetailsDto;
 import com.example.quizeonline5.entity.*;
 import com.example.quizeonline5.repository.*;
 import com.example.quizeonline5.sevice.ExamService;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ExamServiceImpl implements ExamService {
@@ -57,17 +59,16 @@ public class ExamServiceImpl implements ExamService {
         exam = examRepository.save(exam);
 
         // Lưu các câu hỏi vào ExamQuestion
-        for (ExamQuestionDto questionDto : examDto.getQuestions()) {
-            Question question = questionRepository.findById(questionDto.getQuestionId())
-                    .orElseThrow(() -> new IllegalArgumentException("Question not found"));
-
-            ExamQuestion examQuestion = new ExamQuestion();
-            examQuestion.setExam(exam);
-            examQuestion.setQuestion(question);
-            examQuestion.setPoint(questionDto.getPoint());
-
-            examQuestionRepository.save(examQuestion);
-        }
+//        for (ExamQuestionDto questionDto : examDto.getQuestions()) {
+//            Question question = questionRepository.findById(questionDto.getQuestionId())
+//                    .orElseThrow(() -> new IllegalArgumentException("Question not found"));
+//
+//            ExamQuestion examQuestion = new ExamQuestion();
+//            examQuestion.setExam(exam);
+//            examQuestion.setQuestion(question);
+//
+//            examQuestionRepository.save(examQuestion);
+//        }
 
         return exam.getExamId();
     }
@@ -75,5 +76,61 @@ public class ExamServiceImpl implements ExamService {
     @Override
     public List<Exam> getAllExams() {
         return examRepository.findAll();
+    }
+
+    @Override
+    public ExamDto getExamDetails(Long examId) {
+        Exam exam = examRepository.findById(examId)
+                .orElseThrow(() -> new IllegalArgumentException("Exam not found"));
+
+        List<ExamQuestion> examQuestions = examQuestionRepository.findByExam(exam);
+
+        List<ExamQuestionDetailsDto> questionDtos = examQuestions.stream()
+                .map(examQuestion -> {
+                    Question question = examQuestion.getQuestion();
+                    ExamQuestionDetailsDto dto = new ExamQuestionDetailsDto();
+                    dto.setQuestionId(question.getQuestionId());
+                    dto.setQuestionContent(question.getQuestionContent());
+                    dto.setAnswer(question.getAnswer());
+                    dto.setBankId(question.getQuestionBank().getQuestionBankId());
+                    return dto;
+                })
+                .collect(Collectors.toList());
+
+        ExamDto examDto = new ExamDto();
+        examDto.setExamId(exam.getExamId());
+        examDto.setExamName(exam.getExamName());
+        examDto.setClassId(exam.getClassEntity().getClassId());
+        examDto.setSubjectId(exam.getSubject().getSubjectId());
+        examDto.setCreatedBy(exam.getCreatedBy().getUserId());
+        examDto.setDuration(exam.getDuration());
+        examDto.setQuestions(questionDtos);
+
+        return examDto;
+    }
+
+    @Override
+    public void updateExam(Long examId, ExamDto examDto) {
+        Exam exam = examRepository.findById(examId)
+                .orElseThrow(() -> new IllegalArgumentException("Exam not found"));
+
+        exam.setExamName(examDto.getExamName());
+        exam.setDuration(examDto.getDuration());
+        exam.setUpdatedAt(LocalDateTime.now());
+
+        examRepository.save(exam);
+
+//        examQuestionRepository.deleteByExamId(examId);
+
+        for (ExamQuestionDetailsDto questionDto : examDto.getQuestions()) {
+            Question question = questionRepository.findById(questionDto.getQuestionId())
+                    .orElseThrow(() -> new IllegalArgumentException("Question not found"));
+
+            ExamQuestion examQuestion = new ExamQuestion();
+            examQuestion.setExam(exam);
+            examQuestion.setQuestion(question);
+
+            examQuestionRepository.save(examQuestion);
+        }
     }
 }

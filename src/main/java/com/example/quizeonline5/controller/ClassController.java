@@ -53,7 +53,7 @@ public class ClassController {
 
     @GetMapping("/{classId}/students")
     public ResponseEntity<?> getStudentsInClass(@PathVariable Long classId) {
-        return ResponseEntity.ok(classService.getStudentsInClass(classId));
+        return new ResponseEntity< >(CommonResponse.success(classService.getStudentsInClass(classId)), HttpStatus.OK);
     }
 
     @GetMapping("/{classId}/teacher")
@@ -64,6 +64,13 @@ public class ClassController {
     @GetMapping("/teachers/{teacherId}/classes")
     public ResponseEntity<?> getClassesByTeacher(@PathVariable Long teacherId) {
         return ResponseEntity.ok(classService.getClassesByTeacher(teacherId));
+    }
+
+    // get class student enroll
+    @GetMapping("/students/{studentId}")
+    public ResponseEntity<?> getAvailableClassesForStudent(@PathVariable Long studentId) {
+        List<ClassDto> availableClasses = classService.getEnrolledClassByStudent(studentId);
+        return new ResponseEntity<>(CommonResponse.success(availableClasses), HttpStatus.OK);
     }
 
     // get class by classId

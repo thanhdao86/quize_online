@@ -5,6 +5,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 public class ClassDto {
+    @JsonProperty("class_id")
+    Number classId;
+
     @JsonProperty("class_name")
     String className;
 
@@ -17,8 +20,27 @@ public class ClassDto {
     @JsonProperty("students")
     private List<StudentDto> students;
 
+    @JsonProperty("teacher")
+    private UserDto teacher;
+
+    public UserDto getTeacher() {
+        return teacher;
+    }
+
+    public void setTeacher(UserDto teacher) {
+        this.teacher = teacher;
+    }
+
     public String getClassName() {
         return className;
+    }
+
+    public Number getClassId() {
+        return classId;
+    }
+
+    public void setClassId(Number classId) {
+        this.classId = classId;
     }
 
     public void setClassName(String className) {

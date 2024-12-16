@@ -82,14 +82,6 @@ public class QuestionBank {
             orphanRemoval = true)
     private Set<Question> questions;
 
-//    @ManyToMany
-//    @JoinTable(
-//            name = "class_students",
-//            joinColumns = @JoinColumn(name = "class_id"),
-//            inverseJoinColumns = @JoinColumn(name = "student_id")
-//    )
-//    private Set<User> questions = new HashSet<>();
-
     public QuestionBank(Long questionBankId, String bankName, User createdBy, boolean isPublic, LocalDateTime createdAt) {
         this.questionBankId = questionBankId;
         this.bankName = bankName;

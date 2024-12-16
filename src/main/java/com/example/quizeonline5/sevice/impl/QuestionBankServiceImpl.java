@@ -1,6 +1,8 @@
 package com.example.quizeonline5.sevice.impl;
 
 import com.example.quizeonline5.dto.QuestionBankDto;
+import com.example.quizeonline5.dto.QuestionBankDetailDto;
+import com.example.quizeonline5.dto.QuestionDetailDto;
 import com.example.quizeonline5.entity.QuestionBank;
 import com.example.quizeonline5.entity.User;
 import com.example.quizeonline5.repository.QuestionBankRepository;
@@ -61,9 +63,36 @@ public class QuestionBankServiceImpl implements QuestionBankService {
     }
 
     @Override
-    public QuestionBank getQuestionBankDetails(Long questionBankId) {
-        return questionBankRepository.findById(questionBankId)
+    public QuestionBankDetailDto getQuestionBankDetails(Long questionBankId) {
+        QuestionBank questionBank = questionBankRepository.findById(questionBankId)
                 .orElseThrow(() -> new IllegalArgumentException("Question Bank not found"));
+
+        QuestionBankDetailDto detailDto = new QuestionBankDetailDto();
+        detailDto.setQuestionBankId(questionBank.getQuestionBankId());
+        detailDto.setBankName(questionBank.getBankName());
+        detailDto.setCreatedById(questionBank.getCreatedBy().getUserId());
+        detailDto.setPublic(questionBank.isPublic());
+        detailDto.setCreatedAt(questionBank.getCreatedAt());
+
+        // Convert questions to QuestionDetailDto to avoid circular reference
+        if (questionBank.getQuestions() != null) {
+            detailDto.setQuestions(
+                    questionBank.getQuestions().stream()
+                            .map(question -> {
+                                QuestionDetailDto questionDetail = new QuestionDetailDto();
+                                questionDetail.setQuestionId(question.getQuestionId());
+                                questionDetail.setQuestionContent(question.getQuestionContent());
+                                questionDetail.setAnswer(question.getAnswer());
+                                questionDetail.setCorrectAnswer(question.getCorrectAnswer());
+                                questionDetail.setCreatedAt(question.getCreatedAt());
+                                questionDetail.setUpdatedAt(question.getUpdatedAt());
+                                return questionDetail;
+                            })
+                            .collect(Collectors.toList())
+            );
+        }
+
+        return detailDto;
     }
 
     @Override

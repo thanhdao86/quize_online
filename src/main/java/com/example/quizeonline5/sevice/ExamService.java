@@ -8,4 +8,6 @@ import java.util.List;
 public interface ExamService {
     Long createExam(ExamDto examDto);
     List<Exam> getAllExams();
+    ExamDto getExamDetails(Long examId);
+    void updateExam(Long examId, ExamDto examDto); // Add this method
 }
