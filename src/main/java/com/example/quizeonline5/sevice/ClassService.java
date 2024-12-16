@@ -18,4 +18,5 @@ public interface ClassService {
     List<Map<String, Object>> getClassesByTeacher(Long teacherId);
     Classes getClassById(Long classId);
     ApiResponse addStudentToClass(Long classId, StudentDto studentDto);
+    List<ClassDto> getEnrolledClassByStudent(Long studentId);
 }

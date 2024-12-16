@@ -1,14 +1,10 @@
 package com.example.quizeonline5.dto;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 public class ExamQuestionDto {
-
-    @JsonProperty("question_id")
     private Long questionId;
+    private String questionContent;
 
-    @JsonProperty("point")
-    private int point;
+    public ExamQuestionDto() {}
 
     public Long getQuestionId() {
         return questionId;
@@ -18,11 +14,11 @@ public class ExamQuestionDto {
         this.questionId = questionId;
     }
 
-    public int getPoint() {
-        return point;
+    public String getQuestionContent() {
+        return questionContent;
     }
 
-    public void setPoint(int point) {
-        this.point = point;
+    public void setQuestionContent(String questionContent) {
+        this.questionContent = questionContent;
     }
 }

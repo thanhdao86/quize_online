@@ -18,9 +18,6 @@ public class ExamQuestion {
     @JoinColumn(name = "question_id", nullable = false)
     private Question question;
 
-    @Column(nullable = false)
-    private int point;
-
     public Long getId() {
         return id;
     }
@@ -45,19 +42,10 @@ public class ExamQuestion {
         this.question = question;
     }
 
-    public int getPoint() {
-        return point;
-    }
-
-    public void setPoint(int point) {
-        this.point = point;
-    }
-
     public ExamQuestion(Long id, Exam exam, Question question, int point) {
         this.id = id;
         this.exam = exam;
         this.question = question;
-        this.point = point;
     }
 
     public ExamQuestion() {

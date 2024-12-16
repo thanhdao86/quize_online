@@ -179,4 +179,24 @@ public class ClassServiceImpl implements ClassService {
         return new ApiResponse(true, "Student added to class successfully");
     }
 
+    @Override
+    public List<ClassDto> getEnrolledClassByStudent(Long studentId) {
+        User student = userRepository.findById(studentId)
+                .orElseThrow(() -> new IllegalArgumentException("Student not found"));
+
+        List<Classes> availableClasses = classRepository.findAll().stream()
+                .filter(classEntity -> classEntity.getStudents().contains(student))
+                .collect(Collectors.toList());
+
+        return availableClasses.stream()
+                .map(classEntity -> {
+                    ClassDto classDto = new ClassDto();
+                    classDto.setClassId(classEntity.getClassId());
+                    classDto.setClassName(classEntity.getClassName());
+                    classDto.setSubjectId(classEntity.getSubject().getSubjectId());
+//                    classDto.setTeacher(classEntity.getTeacher());
+                    return classDto;
+                })
+                .collect(Collectors.toList());
+    }
 }

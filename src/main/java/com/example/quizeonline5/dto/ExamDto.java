@@ -1,10 +1,12 @@
 package com.example.quizeonline5.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-
 import java.util.List;
 
 public class ExamDto {
+    @JsonProperty("exam_id")
+    private Long examId;
+
     @JsonProperty("exam_name")
     private String examName;
 
@@ -15,13 +17,25 @@ public class ExamDto {
     private Long subjectId;
 
     @JsonProperty("created_by")
-    private Long createdBy; // ID của giáo viên
+    private Long createdBy;
 
     @JsonProperty("duration")
-    private int duration;   // Thời gian làm bài (phút)
+    private int duration;
 
     @JsonProperty("questions")
-    private List<ExamQuestionDto> questions; // Danh sách câu hỏi và điểm
+    private List<ExamQuestionDetailsDto> questions;
+
+    // Constructors
+    public ExamDto() {}
+
+    // Getters and Setters
+    public Long getExamId() {
+        return examId;
+    }
+
+    public void setExamId(Long examId) {
+        this.examId = examId;
+    }
 
     public String getExamName() {
         return examName;
@@ -63,11 +77,11 @@ public class ExamDto {
         this.duration = duration;
     }
 
-    public List<ExamQuestionDto> getQuestions() {
+    public List<ExamQuestionDetailsDto> getQuestions() {
         return questions;
     }
 
-    public void setQuestions(List<ExamQuestionDto> questions) {
+    public void setQuestions(List<ExamQuestionDetailsDto> questions) {
         this.questions = questions;
     }
 }
