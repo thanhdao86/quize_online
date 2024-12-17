@@ -63,7 +63,7 @@ public class ClassController {
 
     @GetMapping("/teachers/{teacherId}/classes")
     public ResponseEntity<?> getClassesByTeacher(@PathVariable Long teacherId) {
-        return ResponseEntity.ok(classService.getClassesByTeacher(teacherId));
+        return new ResponseEntity<>(CommonResponse.success(classService.getClassesByTeacher(teacherId)), HttpStatus.OK);
     }
 
     // get class student enroll

@@ -10,6 +10,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.Map;
+
 @RestController
 @RequestMapping("/api/questions")
 public class QuestionController {
@@ -40,5 +43,11 @@ public class QuestionController {
     public ResponseEntity<?> uploadQuestions(@RequestBody QuestionUploadDto uploadDto) {
         questionUploadService.uploadQuestions(uploadDto);
         return ResponseEntity.ok("Questions uploaded successfully.");
+    }
+
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<?> getQuestionsByUserId(@PathVariable Long userId) {
+        List<Map<String, Object>> questions = questionService.getQuestionsByUserId(userId);
+        return ResponseEntity.ok(CommonResponse.success(questions));
     }
 }

@@ -150,4 +150,12 @@ public class ExamServiceImpl implements ExamService {
             examQuestionRepository.save(examQuestion);
         }
     }
+
+    @Override
+    public List<Exam> getExamsByUserId(Long userId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+
+        return examRepository.findByCreatedByUserId(userId);
+    }
 }

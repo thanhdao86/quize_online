@@ -11,4 +11,5 @@ public interface QuestionService {
     Long addQuestionToBank(QuestionDto questionDto);
     List<Map<String, Object>>  getAllQuestion();
     List<Map<String, Object>>  getAllQuestion(Long bankId);
+    List<Map<String, Object>> getQuestionsByUserId(Long userId);
 }
