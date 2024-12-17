@@ -28,6 +28,14 @@ public class Result {
     @JsonProperty("submitted_at")
     private LocalDateTime submittedAt;
 
+    @Column(name = "total_question")
+    @JsonProperty("total_question")
+    private double totalQuestion; // Tổng số câu hỏi trong bài thi
+
+    @Column(name = "total_correct")
+    @JsonProperty("total_correct")
+    private double totalCorrect; // Tổng số câu trả lời đúng
+
     // Getters và Setters
     @OneToMany(mappedBy = "result", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ResultAnswer> answers; // Các câu trả lời của sinh viên
@@ -72,14 +80,41 @@ public class Result {
         this.submittedAt = submittedAt;
     }
 
-    public Result() {
+    public double getTotalQuestion() {
+        return totalQuestion;
     }
 
-    public Result(Long resultId, User user, Exam exam, double score, LocalDateTime submittedAt) {
+    public void setTotalQuestion(double totalQuestion) {
+        this.totalQuestion = totalQuestion;
+    }
+
+    public double getTotalCorrect() {
+        return totalCorrect;
+    }
+
+    public void setTotalCorrect(double totalCorrect) {
+        this.totalCorrect = totalCorrect;
+    }
+
+    public List<ResultAnswer> getAnswers() {
+        return answers;
+    }
+
+    public void setAnswers(List<ResultAnswer> answers) {
+        this.answers = answers;
+    }
+
+    public Result(Long resultId, User user, Exam exam, double score, LocalDateTime submittedAt, double totalQuestion, double totalCorrect, List<ResultAnswer> answers) {
         this.resultId = resultId;
         this.user = user;
         this.exam = exam;
         this.score = score;
         this.submittedAt = submittedAt;
+        this.totalQuestion = totalQuestion;
+        this.totalCorrect = totalCorrect;
+        this.answers = answers;
+    }
+
+    public Result() {
     }
 }

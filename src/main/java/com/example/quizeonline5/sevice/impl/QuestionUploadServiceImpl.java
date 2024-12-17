@@ -69,28 +69,41 @@ public class QuestionUploadServiceImpl implements QuestionUploadService {
                     continue;
                 }
 
-
-
-
-
-
-
                 // Parse question and answer from the Excel row
                 String questionContent = row.getCell(0).getStringCellValue();
                 if (questionContent.isEmpty()) {
                     // Skip empty question
                     continue;
                 }
+
                 List<QuestionItemDto> questionItems = new ArrayList<>();
-                questionItems.add(new QuestionItemDto("A", row.getCell(1).getStringCellValue()));
-                questionItems.add(new QuestionItemDto("B", row.getCell(2).getStringCellValue()));
-                questionItems.add(new QuestionItemDto("C", row.getCell(3).getStringCellValue()));
-                questionItems.add(new QuestionItemDto("D", row.getCell(4).getStringCellValue()));
+                for (int i = 1; i <= 4; i++) {
+                    String cellValue = "";
+                    if (row.getCell(i) != null) {
+                        switch (row.getCell(i).getCellType()) {
+                            case STRING:
+                                cellValue = row.getCell(i).getStringCellValue();
+                                break;
+                            case NUMERIC:
+                                cellValue = String.valueOf(row.getCell(i).getNumericCellValue());
+                                break;
+                            case BOOLEAN:
+                                cellValue = String.valueOf(row.getCell(i).getBooleanCellValue());
+                                break;
+                            case FORMULA:
+                                cellValue = row.getCell(i).getCellFormula();
+                                break;
+                            default:
+                                cellValue = "";
+                        }
+                    }
+                    questionItems.add(new QuestionItemDto(ENTITY_MAP.get(i), cellValue));
+                }
+
                 ObjectMapper objectMapper = new ObjectMapper();
                 String questionItemsJson = objectMapper.writeValueAsString(questionItems);
 
                 String correctAnswer = row.getCell(5).getStringCellValue();
-
 
                 // Create and save the question
                 Question question = new Question();

@@ -6,6 +6,7 @@ import com.example.quizeonline5.dto.ExamQuestionDetailsDto;
 import com.example.quizeonline5.entity.*;
 import com.example.quizeonline5.repository.*;
 import com.example.quizeonline5.sevice.ExamService;
+import com.example.quizeonline5.utils.AppConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,6 +33,9 @@ public class ExamServiceImpl implements ExamService {
 
     @Autowired
     private QuestionRepository questionRepository;
+
+    @Autowired
+    private ResultRepository resultRepository;
 
     @Override
     public Long createExam(ExamDto examDto) {
@@ -110,12 +114,37 @@ public class ExamServiceImpl implements ExamService {
     }
 
     @Override
-    public List<Exam> getExamByClassId(Long classId) {
+    public List<ExamDto> getExamByClassId(Long classId) {
         Classes classEntity = classRepository.findById(classId)
                 .orElseThrow(() -> new IllegalArgumentException("Class not found"));
-
+        // get all exams by class id
         return examRepository.findAll().stream()
                 .filter(exam -> exam.getClassEntity().getClassId().equals(classEntity.getClassId()))
+                .map(exam -> {
+                    List<ExamQuestion> examQuestions = examQuestionRepository.findByExam(exam);
+                    List<ExamQuestionDetailsDto> questionDtos = examQuestions.stream()
+                            .map(examQuestion -> {
+                                Question question = examQuestion.getQuestion();
+                                ExamQuestionDetailsDto dto = new ExamQuestionDetailsDto();
+                                dto.setQuestionId(question.getQuestionId());
+                                dto.setQuestionContent(question.getQuestionContent());
+                                dto.setAnswer(question.getAnswer());
+                                dto.setBankId(question.getQuestionBank().getQuestionBankId());
+                                return dto;
+                            })
+                            .collect(Collectors.toList());
+
+                    ExamDto examDto = new ExamDto();
+                    examDto.setExamId(exam.getExamId());
+                    examDto.setExamName(exam.getExamName());
+                    examDto.setClassId(exam.getClassEntity().getClassId());
+                    examDto.setSubjectId(exam.getSubject().getSubjectId());
+                    examDto.setCreatedBy(exam.getCreatedBy().getUserId());
+                    examDto.setDuration(exam.getDuration());
+                    examDto.setQuestions(questionDtos);
+
+                    return examDto;
+                })
                 .collect(Collectors.toList());
     }
 
@@ -157,5 +186,171 @@ public class ExamServiceImpl implements ExamService {
                 .orElseThrow(() -> new IllegalArgumentException("User not found"));
 
         return examRepository.findByCreatedByUserId(userId);
+    }
+
+    @Override
+    public  List<ExamDto> getExamByClassId(Long classId, Long studentId, Long teacherId) {
+        Classes classEntity = classRepository.findById(classId)
+                .orElseThrow(() -> new IllegalArgumentException("Class not found"));
+
+        if (teacherId != null) {
+            boolean isTeacher = userRepository.findById(teacherId)
+                    .orElseThrow(() -> new IllegalArgumentException("Teacher not found"))
+                    .getRole().equals(AppConstants.ROLE_TEACHER);
+            if (isTeacher) {
+                return examRepository.findAll().stream()
+                        .filter(exam -> exam.getClassEntity().getClassId().equals(classEntity.getClassId()))
+                        .filter(exam -> exam.getCreatedBy().getUserId().equals(teacherId))
+                        .map(exam -> {
+                            List<ExamQuestion> examQuestions = examQuestionRepository.findByExam(exam);
+                            List<ExamQuestionDetailsDto> questionDtos = examQuestions.stream()
+                                    .map(examQuestion -> {
+                                        Question question = examQuestion.getQuestion();
+                                        ExamQuestionDetailsDto dto = new ExamQuestionDetailsDto();
+                                        dto.setQuestionId(question.getQuestionId());
+                                        dto.setQuestionContent(question.getQuestionContent());
+                                        dto.setAnswer(question.getAnswer());
+                                        dto.setBankId(question.getQuestionBank().getQuestionBankId());
+                                        return dto;
+                                    })
+                                    .collect(Collectors.toList());
+
+                            ExamDto examDto = new ExamDto();
+                            examDto.setExamId(exam.getExamId());
+                            examDto.setExamName(exam.getExamName());
+                            examDto.setClassId(exam.getClassEntity().getClassId());
+                            examDto.setSubjectId(exam.getSubject().getSubjectId());
+                            examDto.setCreatedBy(exam.getCreatedBy().getUserId());
+                            examDto.setDuration(exam.getDuration());
+                            examDto.setQuestions(questionDtos);
+
+                            return examDto;
+                        })
+                        .collect(Collectors.toList());
+            }
+        }
+
+        // return for student
+        if (studentId != null) {
+            boolean isStudent = userRepository.findById(studentId)
+                    .orElseThrow(() -> new IllegalArgumentException("Student not found"))
+                    .getRole().equals(AppConstants.ROLE_STUDENT);
+            if (isStudent) {
+                return examRepository.findAll().stream()
+                        .filter(exam -> exam.getClassEntity().getClassId().equals(classEntity.getClassId()))
+                        .map(exam -> {
+                            List<ExamQuestion> examQuestions = examQuestionRepository.findByExam(exam);
+                            List<ExamQuestionDetailsDto> questionDtos = examQuestions.stream()
+                                    .map(examQuestion -> {
+                                        Question question = examQuestion.getQuestion();
+                                        ExamQuestionDetailsDto dto = new ExamQuestionDetailsDto();
+                                        dto.setQuestionId(question.getQuestionId());
+                                        dto.setQuestionContent(question.getQuestionContent());
+                                        dto.setAnswer(question.getAnswer());
+                                        dto.setBankId(question.getQuestionBank().getQuestionBankId());
+                                        return dto;
+                                    })
+                                    .collect(Collectors.toList());
+
+                            ExamDto examDto = new ExamDto();
+                            examDto.setExamId(exam.getExamId());
+                            examDto.setExamName(exam.getExamName());
+                            examDto.setClassId(exam.getClassEntity().getClassId());
+                            examDto.setSubjectId(exam.getSubject().getSubjectId());
+                            examDto.setCreatedBy(exam.getCreatedBy().getUserId());
+                            examDto.setDuration(exam.getDuration());
+                            examDto.setQuestions(questionDtos);
+
+                            // check exam is submit or not
+                            Result result = resultRepository.findByUser_UserId(studentId)
+                                    .stream()
+                                    .filter(r -> r.getExam().getExamId().equals(exam.getExamId()))
+                                    .findFirst()
+                                    .orElse(null);
+                            if (result != null) {
+                                examDto.setStatus(1L);
+                            } else {
+                                examDto.setStatus(0L);
+                            }
+                            return examDto;
+                        })
+                        .collect(Collectors.toList());
+
+            }
+        }
+
+        // default return for admin
+        return examRepository.findAll().stream()
+                .filter(exam -> exam.getClassEntity().getClassId().equals(classEntity.getClassId()))
+                .map(exam -> {
+                    List<ExamQuestion> examQuestions = examQuestionRepository.findByExam(exam);
+                    List<ExamQuestionDetailsDto> questionDtos = examQuestions.stream()
+                            .map(examQuestion -> {
+                                Question question = examQuestion.getQuestion();
+                                ExamQuestionDetailsDto dto = new ExamQuestionDetailsDto();
+                                dto.setQuestionId(question.getQuestionId());
+                                dto.setQuestionContent(question.getQuestionContent());
+                                dto.setAnswer(question.getAnswer());
+                                dto.setBankId(question.getQuestionBank().getQuestionBankId());
+                                return dto;
+                            })
+                            .collect(Collectors.toList());
+
+                    ExamDto examDto = new ExamDto();
+                    examDto.setExamId(exam.getExamId());
+                    examDto.setExamName(exam.getExamName());
+                    examDto.setClassId(exam.getClassEntity().getClassId());
+                    examDto.setSubjectId(exam.getSubject().getSubjectId());
+                    examDto.setCreatedBy(exam.getCreatedBy().getUserId());
+                    examDto.setDuration(exam.getDuration());
+                    examDto.setQuestions(questionDtos);
+
+                    return examDto;
+                })
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public ExamDto getExamDetails(Long examId, Long studentId) {
+        Exam exam = examRepository.findById(examId)
+                .orElseThrow(() -> new IllegalArgumentException("Exam not found"));
+
+        List<ExamQuestion> examQuestions = examQuestionRepository.findByExam(exam);
+
+        List<ExamQuestionDetailsDto> questionDtos = examQuestions.stream()
+                .map(examQuestion -> {
+                    Question question = examQuestion.getQuestion();
+                    ExamQuestionDetailsDto dto = new ExamQuestionDetailsDto();
+                    dto.setQuestionId(question.getQuestionId());
+                    dto.setQuestionContent(question.getQuestionContent());
+                    dto.setAnswer(question.getAnswer());
+                    dto.setBankId(question.getQuestionBank().getQuestionBankId());
+                    return dto;
+                })
+                .collect(Collectors.toList());
+
+        ExamDto examDto = new ExamDto();
+        examDto.setExamId(exam.getExamId());
+        examDto.setExamName(exam.getExamName());
+        examDto.setClassId(exam.getClassEntity().getClassId());
+        examDto.setSubjectId(exam.getSubject().getSubjectId());
+        examDto.setCreatedBy(exam.getCreatedBy().getUserId());
+        examDto.setDuration(exam.getDuration());
+        examDto.setQuestions(questionDtos);
+
+        // check exam is submit or not
+        Result result = resultRepository.findByUser_UserId(studentId)
+                .stream()
+                .filter(r -> r.getExam().getExamId().equals(exam.getExamId()))
+                .findFirst()
+                .orElse(null);
+        if (result != null) {
+            examDto.setResult(result);
+            examDto.setStatus(1L);
+        } else {
+            examDto.setStatus(0L);
+        }
+
+        return examDto;
     }
 }

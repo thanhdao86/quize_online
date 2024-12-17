@@ -4,6 +4,7 @@ import com.example.quizeonline5.dto.CommonResponse;
 import com.example.quizeonline5.dto.ExamDto;
 import com.example.quizeonline5.entity.Exam;
 import com.example.quizeonline5.sevice.ExamService;
+import org.hibernate.annotations.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,13 +37,15 @@ public class ExamController {
     }
 
     @GetMapping("/{examId}")
-    public ResponseEntity<?> getExamDetails(@PathVariable Long examId) {
-        return new ResponseEntity< >(CommonResponse.success(examService.getExamDetails(examId)), HttpStatus.OK);
+    public ResponseEntity<?> getExamDetails(@PathVariable Long examId,
+                                            @RequestParam(name = "student_id", required = false) Long studentId) {
+        return new ResponseEntity< >(CommonResponse.success(examService.getExamDetails(examId, studentId)), HttpStatus.OK);
     }
 
     @GetMapping("/class/{classId}")
-    public ResponseEntity<?> getExamDetailByClassId(@PathVariable Long classId) {
-        return new ResponseEntity< >(CommonResponse.success(examService.getExamByClassId(classId)), HttpStatus.OK);
+    public ResponseEntity<?> getExamDetailByClassId(@PathVariable Long classId,  @RequestParam(name = "student_id", required = false) Long studentId,
+                                                    @RequestParam(name = "teacher_id", required = false) Long teacherId) {
+        return new ResponseEntity< >(CommonResponse.success(examService.getExamByClassId(classId, studentId, teacherId)), HttpStatus.OK);
     }
 
     @GetMapping("/user/{userId}")

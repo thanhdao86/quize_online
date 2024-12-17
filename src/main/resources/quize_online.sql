@@ -11,7 +11,7 @@
  Target Server Version : 80039 (8.0.39)
  File Encoding         : 65001
 
- Date: 17/12/2024 00:14:03
+ Date: 18/12/2024 00:30:27
 */
 
 SET NAMES utf8mb4;
@@ -30,19 +30,33 @@ CREATE TABLE `class_students` (
   KEY `FKi67hsuppqm0qnfgn2x8d7v2lj` (`student_id`),
   CONSTRAINT `FKi67hsuppqm0qnfgn2x8d7v2lj` FOREIGN KEY (`student_id`) REFERENCES `users` (`user_id`),
   CONSTRAINT `FKjuh9br5vimkw71ko8qyswp3ci` FOREIGN KEY (`class_id`) REFERENCES `classes` (`class_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- ----------------------------
 -- Records of class_students
 -- ----------------------------
 BEGIN;
-INSERT INTO `class_students` (`id`, `class_id`, `student_id`) VALUES (34, 1, 15);
-INSERT INTO `class_students` (`id`, `class_id`, `student_id`) VALUES (35, 1, 14);
-INSERT INTO `class_students` (`id`, `class_id`, `student_id`) VALUES (36, 1, 16);
-INSERT INTO `class_students` (`id`, `class_id`, `student_id`) VALUES (37, 2, 16);
-INSERT INTO `class_students` (`id`, `class_id`, `student_id`) VALUES (38, 3, 16);
 INSERT INTO `class_students` (`id`, `class_id`, `student_id`) VALUES (39, 6, 18);
 INSERT INTO `class_students` (`id`, `class_id`, `student_id`) VALUES (40, 6, 20);
+INSERT INTO `class_students` (`id`, `class_id`, `student_id`) VALUES (42, 7, 14);
+INSERT INTO `class_students` (`id`, `class_id`, `student_id`) VALUES (43, 7, 15);
+INSERT INTO `class_students` (`id`, `class_id`, `student_id`) VALUES (44, 7, 16);
+INSERT INTO `class_students` (`id`, `class_id`, `student_id`) VALUES (45, 7, 18);
+INSERT INTO `class_students` (`id`, `class_id`, `student_id`) VALUES (46, 7, 20);
+INSERT INTO `class_students` (`id`, `class_id`, `student_id`) VALUES (50, 8, 24);
+INSERT INTO `class_students` (`id`, `class_id`, `student_id`) VALUES (51, 8, 23);
+INSERT INTO `class_students` (`id`, `class_id`, `student_id`) VALUES (52, 2, 16);
+INSERT INTO `class_students` (`id`, `class_id`, `student_id`) VALUES (53, 2, 24);
+INSERT INTO `class_students` (`id`, `class_id`, `student_id`) VALUES (54, 2, 20);
+INSERT INTO `class_students` (`id`, `class_id`, `student_id`) VALUES (55, 2, 25);
+INSERT INTO `class_students` (`id`, `class_id`, `student_id`) VALUES (56, 2, 23);
+INSERT INTO `class_students` (`id`, `class_id`, `student_id`) VALUES (57, 1, 14);
+INSERT INTO `class_students` (`id`, `class_id`, `student_id`) VALUES (58, 1, 16);
+INSERT INTO `class_students` (`id`, `class_id`, `student_id`) VALUES (59, 1, 15);
+INSERT INTO `class_students` (`id`, `class_id`, `student_id`) VALUES (60, 1, 23);
+INSERT INTO `class_students` (`id`, `class_id`, `student_id`) VALUES (61, 3, 16);
+INSERT INTO `class_students` (`id`, `class_id`, `student_id`) VALUES (62, 3, 23);
+INSERT INTO `class_students` (`id`, `class_id`, `student_id`) VALUES (64, 9, 23);
 COMMIT;
 
 -- ----------------------------
@@ -61,18 +75,21 @@ CREATE TABLE `classes` (
   KEY `fk21232` (`subject_id`),
   CONSTRAINT `fk21232` FOREIGN KEY (`subject_id`) REFERENCES `subjects` (`subject_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `FK4tv5efpqhlo8xg8l8dpba8v75` FOREIGN KEY (`teacher_id`) REFERENCES `users` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- ----------------------------
 -- Records of classes
 -- ----------------------------
 BEGIN;
-INSERT INTO `classes` (`class_id`, `class_name`, `subject_id`, `teacher_id`, `created_at`, `updated_at`) VALUES (1, '11A1 222B', 6, 17, '2024-12-15 21:00:36', '2024-12-16 22:27:10');
-INSERT INTO `classes` (`class_id`, `class_name`, `subject_id`, `teacher_id`, `created_at`, `updated_at`) VALUES (2, '11A2', 3, 10, '2024-12-15 21:13:18', '2024-12-16 22:27:14');
-INSERT INTO `classes` (`class_id`, `class_name`, `subject_id`, `teacher_id`, `created_at`, `updated_at`) VALUES (3, '11A3', 4, 10, '2024-12-15 21:13:25', '2024-12-16 22:27:19');
+INSERT INTO `classes` (`class_id`, `class_name`, `subject_id`, `teacher_id`, `created_at`, `updated_at`) VALUES (1, '11A1 222B', 6, 17, '2024-12-15 21:00:36', '2024-12-18 00:00:48');
+INSERT INTO `classes` (`class_id`, `class_name`, `subject_id`, `teacher_id`, `created_at`, `updated_at`) VALUES (2, '11A2', 3, 21, '2024-12-15 21:13:18', '2024-12-17 23:58:30');
+INSERT INTO `classes` (`class_id`, `class_name`, `subject_id`, `teacher_id`, `created_at`, `updated_at`) VALUES (3, '11A3', 4, 10, '2024-12-15 21:13:25', '2024-12-18 00:02:24');
 INSERT INTO `classes` (`class_id`, `class_name`, `subject_id`, `teacher_id`, `created_at`, `updated_at`) VALUES (4, '12B2', 1, 10, '2024-12-16 22:07:11', '2024-12-16 22:07:11');
 INSERT INTO `classes` (`class_id`, `class_name`, `subject_id`, `teacher_id`, `created_at`, `updated_at`) VALUES (5, 'Lop Moi toanh 123123', 4, 10, '2024-12-16 22:16:56', '2024-12-16 22:26:59');
 INSERT INTO `classes` (`class_id`, `class_name`, `subject_id`, `teacher_id`, `created_at`, `updated_at`) VALUES (6, 'Hoa dai cuong 1', 8, 19, '2024-12-16 22:46:06', '2024-12-16 22:49:23');
+INSERT INTO `classes` (`class_id`, `class_name`, `subject_id`, `teacher_id`, `created_at`, `updated_at`) VALUES (7, 'CNTT 03', 3, 21, '2024-12-17 22:30:34', '2024-12-17 22:30:44');
+INSERT INTO `classes` (`class_id`, `class_name`, `subject_id`, `teacher_id`, `created_at`, `updated_at`) VALUES (8, 'Kiem tra cuối kỳ Hoá 1 ', 10, 22, '2024-12-17 23:25:57', '2024-12-17 23:27:40');
+INSERT INTO `classes` (`class_id`, `class_name`, `subject_id`, `teacher_id`, `created_at`, `updated_at`) VALUES (9, '12A1', 10, 22, '2024-12-18 00:03:14', '2024-12-18 00:07:52');
 COMMIT;
 
 -- ----------------------------
@@ -88,37 +105,33 @@ CREATE TABLE `exam_questions` (
   KEY `FKs0t1710in6q97whp93ggrs1wg` (`question_id`),
   CONSTRAINT `FK5cd6sjmccb11rrwpyabyc81c0` FOREIGN KEY (`exam_id`) REFERENCES `exams` (`exam_id`),
   CONSTRAINT `FKs0t1710in6q97whp93ggrs1wg` FOREIGN KEY (`question_id`) REFERENCES `questions` (`question_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- ----------------------------
 -- Records of exam_questions
 -- ----------------------------
 BEGIN;
-COMMIT;
-
--- ----------------------------
--- Table structure for exam_results
--- ----------------------------
-DROP TABLE IF EXISTS `exam_results`;
-CREATE TABLE `exam_results` (
-  `result_id` bigint NOT NULL AUTO_INCREMENT,
-  `user_id` bigint NOT NULL,
-  `exam_id` bigint NOT NULL,
-  `score` int DEFAULT NULL,
-  `submitted_at` datetime NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NOT NULL ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`result_id`) USING BTREE,
-  KEY `FKtf85ht7yquiorwjx2xbdx3fxw` (`exam_id`),
-  KEY `FKt2jcn29o332cpiv7s7h3o877e` (`user_id`),
-  CONSTRAINT `FKt2jcn29o332cpiv7s7h3o877e` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`),
-  CONSTRAINT `FKtf85ht7yquiorwjx2xbdx3fxw` FOREIGN KEY (`exam_id`) REFERENCES `exams` (`exam_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- ----------------------------
--- Records of exam_results
--- ----------------------------
-BEGIN;
+INSERT INTO `exam_questions` (`id`, `exam_id`, `question_id`) VALUES (42, 3, 83);
+INSERT INTO `exam_questions` (`id`, `exam_id`, `question_id`) VALUES (43, 3, 84);
+INSERT INTO `exam_questions` (`id`, `exam_id`, `question_id`) VALUES (44, 5, 70);
+INSERT INTO `exam_questions` (`id`, `exam_id`, `question_id`) VALUES (45, 5, 79);
+INSERT INTO `exam_questions` (`id`, `exam_id`, `question_id`) VALUES (46, 5, 74);
+INSERT INTO `exam_questions` (`id`, `exam_id`, `question_id`) VALUES (49, 6, 87);
+INSERT INTO `exam_questions` (`id`, `exam_id`, `question_id`) VALUES (50, 6, 73);
+INSERT INTO `exam_questions` (`id`, `exam_id`, `question_id`) VALUES (51, 6, 79);
+INSERT INTO `exam_questions` (`id`, `exam_id`, `question_id`) VALUES (52, 6, 80);
+INSERT INTO `exam_questions` (`id`, `exam_id`, `question_id`) VALUES (53, 6, 69);
+INSERT INTO `exam_questions` (`id`, `exam_id`, `question_id`) VALUES (54, 6, 63);
+INSERT INTO `exam_questions` (`id`, `exam_id`, `question_id`) VALUES (55, 6, 77);
+INSERT INTO `exam_questions` (`id`, `exam_id`, `question_id`) VALUES (56, 6, 71);
+INSERT INTO `exam_questions` (`id`, `exam_id`, `question_id`) VALUES (57, 6, 49);
+INSERT INTO `exam_questions` (`id`, `exam_id`, `question_id`) VALUES (58, 6, 60);
+INSERT INTO `exam_questions` (`id`, `exam_id`, `question_id`) VALUES (59, 6, 70);
+INSERT INTO `exam_questions` (`id`, `exam_id`, `question_id`) VALUES (60, 6, 82);
+INSERT INTO `exam_questions` (`id`, `exam_id`, `question_id`) VALUES (61, 6, 57);
+INSERT INTO `exam_questions` (`id`, `exam_id`, `question_id`) VALUES (62, 6, 66);
+INSERT INTO `exam_questions` (`id`, `exam_id`, `question_id`) VALUES (63, 6, 65);
+INSERT INTO `exam_questions` (`id`, `exam_id`, `question_id`) VALUES (64, 6, 64);
 COMMIT;
 
 -- ----------------------------
@@ -142,16 +155,18 @@ CREATE TABLE `exams` (
   CONSTRAINT `FKa9pp7fvh0i6302peis1x76ots` FOREIGN KEY (`created_by`) REFERENCES `users` (`user_id`),
   CONSTRAINT `FKkq9895f263nw6qxibikek0t40` FOREIGN KEY (`class_id`) REFERENCES `classes` (`class_id`),
   CONSTRAINT `FKopre4n7j7fpxqbtbwpv8ywn1y` FOREIGN KEY (`subject_id`) REFERENCES `subjects` (`subject_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- ----------------------------
 -- Records of exams
 -- ----------------------------
 BEGIN;
-INSERT INTO `exams` (`exam_id`, `exam_name`, `subject_id`, `class_id`, `created_by`, `duration`, `created_at`, `updated_at`) VALUES (1, 'exam 12', 3, 1, 6, 1, '2024-12-15 21:27:43', '2024-12-16 20:35:27');
+INSERT INTO `exams` (`exam_id`, `exam_name`, `subject_id`, `class_id`, `created_by`, `duration`, `created_at`, `updated_at`) VALUES (1, 'exam 12', 3, 2, 6, 1, '2024-12-15 21:27:43', '2024-12-17 20:24:37');
 INSERT INTO `exams` (`exam_id`, `exam_name`, `subject_id`, `class_id`, `created_by`, `duration`, `created_at`, `updated_at`) VALUES (2, 'Bai thi 1', 4, 1, 6, 30, '2024-12-15 22:10:45', '2024-12-16 19:59:59');
-INSERT INTO `exams` (`exam_id`, `exam_name`, `subject_id`, `class_id`, `created_by`, `duration`, `created_at`, `updated_at`) VALUES (3, 'TK Exam', 9, 2, 6, 30, '2024-12-16 22:51:47', '2024-12-16 22:51:47');
+INSERT INTO `exams` (`exam_id`, `exam_name`, `subject_id`, `class_id`, `created_by`, `duration`, `created_at`, `updated_at`) VALUES (3, 'TK Exam', 9, 2, 6, 30, '2024-12-16 22:51:47', '2024-12-17 20:18:18');
 INSERT INTO `exams` (`exam_id`, `exam_name`, `subject_id`, `class_id`, `created_by`, `duration`, `created_at`, `updated_at`) VALUES (4, 'Kiem tra hoa', 8, 6, 6, 1, '2024-12-16 22:55:56', '2024-12-16 22:58:18');
+INSERT INTO `exams` (`exam_id`, `exam_name`, `subject_id`, `class_id`, `created_by`, `duration`, `created_at`, `updated_at`) VALUES (5, 'Test1', 3, 7, 21, 30, '2024-12-17 22:32:01', '2024-12-17 22:32:36');
+INSERT INTO `exams` (`exam_id`, `exam_name`, `subject_id`, `class_id`, `created_by`, `duration`, `created_at`, `updated_at`) VALUES (6, 'Kiem tra Hoa 1', 10, 8, 6, 1, '2024-12-17 23:28:29', '2024-12-17 23:37:49');
 COMMIT;
 
 -- ----------------------------
@@ -167,7 +182,7 @@ CREATE TABLE `question_banks` (
   PRIMARY KEY (`question_bank_id`),
   KEY `FKaoc8pganxt0sge51oqvc5oqcp` (`created_by`),
   CONSTRAINT `FKaoc8pganxt0sge51oqvc5oqcp` FOREIGN KEY (`created_by`) REFERENCES `users` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- ----------------------------
 -- Records of question_banks
@@ -178,6 +193,8 @@ INSERT INTO `question_banks` (`question_bank_id`, `bank_name`, `created_at`, `is
 INSERT INTO `question_banks` (`question_bank_id`, `bank_name`, `created_at`, `is_public`, `created_by`) VALUES (3, 'Ngân hàng câu hỏi địa', '2024-12-14 17:21:02.517431', b'1', 6);
 INSERT INTO `question_banks` (`question_bank_id`, `bank_name`, `created_at`, `is_public`, `created_by`) VALUES (4, 'niu', '2024-12-15 21:01:20.754973', b'0', 6);
 INSERT INTO `question_banks` (`question_bank_id`, `bank_name`, `created_at`, `is_public`, `created_by`) VALUES (7, 'Ngân hàng câu hỏi Hoá', '2024-12-16 22:46:31.246793', b'0', 6);
+INSERT INTO `question_banks` (`question_bank_id`, `bank_name`, `created_at`, `is_public`, `created_by`) VALUES (8, 'Teacher BANK', '2024-12-17 20:06:53.301539', b'1', 21);
+INSERT INTO `question_banks` (`question_bank_id`, `bank_name`, `created_at`, `is_public`, `created_by`) VALUES (9, 'Hoa 1', '2024-12-17 23:28:00.108173', b'1', 6);
 COMMIT;
 
 -- ----------------------------
@@ -186,8 +203,8 @@ COMMIT;
 DROP TABLE IF EXISTS `questions`;
 CREATE TABLE `questions` (
   `question_id` bigint NOT NULL AUTO_INCREMENT,
-  `question_content` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `answer` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `question_content` text COLLATE utf8mb4_general_ci,
+  `answer` text COLLATE utf8mb4_general_ci NOT NULL,
   `correct_answer` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `question_bank_id` bigint NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -195,7 +212,7 @@ CREATE TABLE `questions` (
   PRIMARY KEY (`question_id`) USING BTREE,
   KEY `FK001` (`question_bank_id`),
   CONSTRAINT `FK001` FOREIGN KEY (`question_bank_id`) REFERENCES `question_banks` (`question_bank_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=90 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of questions
@@ -216,6 +233,41 @@ INSERT INTO `questions` (`question_id`, `question_content`, `answer`, `correct_a
 INSERT INTO `questions` (`question_id`, `question_content`, `answer`, `correct_answer`, `question_bank_id`, `created_at`, `updated_at`) VALUES (46, 'I _______ in the room right now', '[{\"key\":\"A\",\"value\":\"am being\"},{\"key\":\"B\",\"value\":\"was being\"},{\"key\":\"C\",\"value\":\"have been being\"},{\"key\":\"D\",\"value\":\"am\"}]', 'D', 7, '2024-12-17 00:12:10', '2024-12-17 00:12:10');
 INSERT INTO `questions` (`question_id`, `question_content`, `answer`, `correct_answer`, `question_bank_id`, `created_at`, `updated_at`) VALUES (47, 'I ______ to New York three times this year', '[{\"key\":\"A\",\"value\":\"have been\"},{\"key\":\"B\",\"value\":\"was\"},{\"key\":\"C\",\"value\":\"were\"},{\"key\":\"D\",\"value\":\"had been\"}]', 'A', 7, '2024-12-17 00:12:10', '2024-12-17 00:12:10');
 INSERT INTO `questions` (`question_id`, `question_content`, `answer`, `correct_answer`, `question_bank_id`, `created_at`, `updated_at`) VALUES (48, 'I’ll come and see you before I _______ for the States', '[{\"key\":\"A\",\"value\":\"leave\"},{\"key\":\"B\",\"value\":\"will leave\"},{\"key\":\"C\",\"value\":\"have left\"},{\"key\":\"D\",\"value\":\"shall leave\"}]', 'A', 7, '2024-12-17 00:12:10', '2024-12-17 00:12:10');
+INSERT INTO `questions` (`question_id`, `question_content`, `answer`, `correct_answer`, `question_bank_id`, `created_at`, `updated_at`) VALUES (49, '1 + 1 = ?', '[{\"key\":\"A\",\"value\":\"2\"},{\"key\":\"B\",\"value\":\"3\"},{\"key\":\"C\",\"value\":\"4\"},{\"key\":\"D\",\"value\":\"1\"}]', 'A', 1, '2024-12-17 19:42:32', '2024-12-17 19:42:32');
+INSERT INTO `questions` (`question_id`, `question_content`, `answer`, `correct_answer`, `question_bank_id`, `created_at`, `updated_at`) VALUES (56, 'HOHOHOHOHO', '[{\"key\":\"A\",\"value\":\"AB\"},{\"key\":\"B\",\"value\":\"AC\"},{\"key\":\"C\",\"value\":\"AD\"},{\"key\":\"D\",\"value\":\"AE\"}]', 'C', 1, '2024-12-17 19:59:42', '2024-12-17 19:59:42');
+INSERT INTO `questions` (`question_id`, `question_content`, `answer`, `correct_answer`, `question_bank_id`, `created_at`, `updated_at`) VALUES (57, 'Phát triển không bền vững là gì?', '[{\"key\":\"A\",\"value\":\"Sự tăng trưởng kinh tế không cùng nhịp với tiến bộ và sự phát triển xã hội.\"},{\"key\":\"B\",\"value\":\" Sự tăng trưởng kinh tế không cùng nhịp với tiến bộ và sự phát triển giáo dục.\"},{\"key\":\"C\",\"value\":\"Sự tăng trưởng không cùng nhịp giữa giáo dục, xã hội và môi trường.\"},{\"key\":\"D\",\"value\":\"Sự tăng trưởng không đồng đều giữa môi trường và xã hội.\"}]', 'A', 1, '2024-12-17 20:00:02', '2024-12-17 20:00:02');
+INSERT INTO `questions` (`question_id`, `question_content`, `answer`, `correct_answer`, `question_bank_id`, `created_at`, `updated_at`) VALUES (58, 'Phát triển không bền vững về xã hội là gì?', '[{\"key\":\"A\",\"value\":\"Tăng trưởng kinh tế nhưng không có sự tiến bộ và công bằng xã hội; văn hóa, đạo đức bị suy đồi; sự phân hóa giàu nghèo dẫn tới sự bất ổn trong xã hội.\"},{\"key\":\"B\",\"value\":\" Tăng trưởng kinh tế nhưng không có sự tiến bộ văn hóa và công bằng xã hội, môi trường, dẫn đến sự phân hóa giàu nghèo dẫn tới sự bất ổn trong xã hội.\"},{\"key\":\"C\",\"value\":\"Tăng trưởng kinh tế nhưng không có sự tiến bộ văn hóa, đạo đức bị suy đồi, phân hóa giàu nghèo dẫn tới sự bất ổn trong xã hội.\"},{\"key\":\"D\",\"value\":\" Tăng trưởng kinh tế nhưng không có sự tiến bộ và công bằng xã hội dẫn đến sự phân hóa giàu nghèo dẫn tới sự bất ổn trong xã hội.\"}]', 'A', 1, '2024-12-17 20:00:02', '2024-12-17 20:00:02');
+INSERT INTO `questions` (`question_id`, `question_content`, `answer`, `correct_answer`, `question_bank_id`, `created_at`, `updated_at`) VALUES (59, 'Khái niệm phát triển bền vững do Uỷ ban Liên hợp quốc về Môi trường và Phát triển (UNCED) đưa ra năm 1987 là?', '[{\"key\":\"A\",\"value\":\" Phát triển bền vững thoả mãn lợi ích của hiện tại nhưng không làm giảm lợi ích của thế hệ sau.\"},{\"key\":\"B\",\"value\":\"    Phát triển bền vững thoả mãn những nhu cầu của hiện tại nhưng không làm giảm lợi ích của các thế hệ mai sau.\"},{\"key\":\"C\",\"value\":\"Phát triển bền vững thoả mãn những nhu cầu của hiện tại nhưng không làm giảm khả năng thoả mãn nhu cầu của các thế hệ mai sau.\"},{\"key\":\"D\",\"value\":\"Phát triển bền vững thoả mãn những nhu cầu kinh tế, xã hội hiện tại nhưng không làm giảm khả nhu cầu kinh tế, xã hội của các thế hệ mai sau.\"}]', 'C', 1, '2024-12-17 20:00:02', '2024-12-17 20:00:02');
+INSERT INTO `questions` (`question_id`, `question_content`, `answer`, `correct_answer`, `question_bank_id`, `created_at`, `updated_at`) VALUES (60, 'Mô hình phát triển bền vững là?', '[{\"key\":\"A\",\"value\":\"Sự hoà nhập, đan xen và thoả hiệp của ba hệ thống tương tác lẫn nhau là kinh tế, xã hội và môi trường.\"},{\"key\":\"B\",\"value\":\"Sự hoà nhập, đan xen, thoả hiệp, tương tác giữa hai hệ thống kinh tế và môi trường.\"},{\"key\":\"C\",\"value\":\"  Sự hoà nhập, đan xen, thoả hiệp, tương tác giữa hai hệ thống kinh tế và xã hội.\"},{\"key\":\"D\",\"value\":\"Sự hoà nhập, đan xen và thoả hiệp của ba hệ thống tương tác lẫn nhau là kinh tế, văn hóa, xã hội.\"}]', 'A', 1, '2024-12-17 20:00:02', '2024-12-17 20:00:02');
+INSERT INTO `questions` (`question_id`, `question_content`, `answer`, `correct_answer`, `question_bank_id`, `created_at`, `updated_at`) VALUES (61, 'Phát triển bền vững về kinh tế là gì?', '[{\"key\":\"A\",\"value\":\" Phát triển nhanh và toàn diện.\"},{\"key\":\"B\",\"value\":\"Phát triển chất lượng và toàn diện. \"},{\"key\":\"C\",\"value\":\" Phát triển nhanh an toàn và chất lượng. \"},{\"key\":\"D\",\"value\":\"Phát triển an toàn và chất lượng\"}]', 'C', 1, '2024-12-17 20:00:02', '2024-12-17 20:00:02');
+INSERT INTO `questions` (`question_id`, `question_content`, `answer`, `correct_answer`, `question_bank_id`, `created_at`, `updated_at`) VALUES (62, 'Phát triển bền vững về môi trường là gì?', '[{\"key\":\"A\",\"value\":\" Sự cân bằng giữa sử dụng các yếu tố tự nhiên, nhân tạo, chất lượng môi trường sống của con người phải được bảo đảm. \"},{\"key\":\"B\",\"value\":\" Duy trì sự cân bằng giữa việc phát triển kinh tế, khai thác tài nguyên thiên nhiên và bảo vệ môi trường.\"},{\"key\":\"C\",\"value\":\" Duy trì sự khai thác nguồn tài nguyên thiên nhiên phục vụ lợi ích con người, phát triển kinh tế.\"},{\"key\":\"D\",\"value\":\" Duy trì sự cân bằng giữa bảo vệ môi trường tự nhiên với sự khai thác nguồn tài nguyên thiên nhiên phục vụ lợi ích con người.\"}]', 'D', 1, '2024-12-17 20:00:02', '2024-12-17 20:00:02');
+INSERT INTO `questions` (`question_id`, `question_content`, `answer`, `correct_answer`, `question_bank_id`, `created_at`, `updated_at`) VALUES (63, 'Phát triển không bền vững là gì?', '[{\"key\":\"A\",\"value\":\"Sự tăng trưởng kinh tế không cùng nhịp với tiến bộ và sự phát triển xã hội.\"},{\"key\":\"B\",\"value\":\" Sự tăng trưởng kinh tế không cùng nhịp với tiến bộ và sự phát triển giáo dục.\"},{\"key\":\"C\",\"value\":\"Sự tăng trưởng không cùng nhịp giữa giáo dục, xã hội và môi trường.\"},{\"key\":\"D\",\"value\":\"Sự tăng trưởng không đồng đều giữa môi trường và xã hội.\"}]', 'A', 1, '2024-12-17 20:05:40', '2024-12-17 20:05:40');
+INSERT INTO `questions` (`question_id`, `question_content`, `answer`, `correct_answer`, `question_bank_id`, `created_at`, `updated_at`) VALUES (64, 'Phát triển không bền vững về xã hội là gì?', '[{\"key\":\"A\",\"value\":\"Tăng trưởng kinh tế nhưng không có sự tiến bộ và công bằng xã hội; văn hóa, đạo đức bị suy đồi; sự phân hóa giàu nghèo dẫn tới sự bất ổn trong xã hội.\"},{\"key\":\"B\",\"value\":\" Tăng trưởng kinh tế nhưng không có sự tiến bộ văn hóa và công bằng xã hội, môi trường, dẫn đến sự phân hóa giàu nghèo dẫn tới sự bất ổn trong xã hội.\"},{\"key\":\"C\",\"value\":\"Tăng trưởng kinh tế nhưng không có sự tiến bộ văn hóa, đạo đức bị suy đồi, phân hóa giàu nghèo dẫn tới sự bất ổn trong xã hội.\"},{\"key\":\"D\",\"value\":\" Tăng trưởng kinh tế nhưng không có sự tiến bộ và công bằng xã hội dẫn đến sự phân hóa giàu nghèo dẫn tới sự bất ổn trong xã hội.\"}]', 'A', 1, '2024-12-17 20:05:40', '2024-12-17 20:05:40');
+INSERT INTO `questions` (`question_id`, `question_content`, `answer`, `correct_answer`, `question_bank_id`, `created_at`, `updated_at`) VALUES (65, 'Khái niệm phát triển bền vững do Uỷ ban Liên hợp quốc về Môi trường và Phát triển (UNCED) đưa ra năm 1987 là?', '[{\"key\":\"A\",\"value\":\" Phát triển bền vững thoả mãn lợi ích của hiện tại nhưng không làm giảm lợi ích của thế hệ sau.\"},{\"key\":\"B\",\"value\":\"    Phát triển bền vững thoả mãn những nhu cầu của hiện tại nhưng không làm giảm lợi ích của các thế hệ mai sau.\"},{\"key\":\"C\",\"value\":\"Phát triển bền vững thoả mãn những nhu cầu của hiện tại nhưng không làm giảm khả năng thoả mãn nhu cầu của các thế hệ mai sau.\"},{\"key\":\"D\",\"value\":\"Phát triển bền vững thoả mãn những nhu cầu kinh tế, xã hội hiện tại nhưng không làm giảm khả nhu cầu kinh tế, xã hội của các thế hệ mai sau.\"}]', 'C', 1, '2024-12-17 20:05:40', '2024-12-17 20:05:40');
+INSERT INTO `questions` (`question_id`, `question_content`, `answer`, `correct_answer`, `question_bank_id`, `created_at`, `updated_at`) VALUES (66, 'Mô hình phát triển bền vững là?', '[{\"key\":\"A\",\"value\":\"Sự hoà nhập, đan xen và thoả hiệp của ba hệ thống tương tác lẫn nhau là kinh tế, xã hội và môi trường.\"},{\"key\":\"B\",\"value\":\"Sự hoà nhập, đan xen, thoả hiệp, tương tác giữa hai hệ thống kinh tế và môi trường.\"},{\"key\":\"C\",\"value\":\"  Sự hoà nhập, đan xen, thoả hiệp, tương tác giữa hai hệ thống kinh tế và xã hội.\"},{\"key\":\"D\",\"value\":\"Sự hoà nhập, đan xen và thoả hiệp của ba hệ thống tương tác lẫn nhau là kinh tế, văn hóa, xã hội.\"}]', 'A', 1, '2024-12-17 20:05:40', '2024-12-17 20:05:40');
+INSERT INTO `questions` (`question_id`, `question_content`, `answer`, `correct_answer`, `question_bank_id`, `created_at`, `updated_at`) VALUES (67, 'Phát triển bền vững về kinh tế là gì?', '[{\"key\":\"A\",\"value\":\" Phát triển nhanh và toàn diện.\"},{\"key\":\"B\",\"value\":\"Phát triển chất lượng và toàn diện. \"},{\"key\":\"C\",\"value\":\" Phát triển nhanh an toàn và chất lượng. \"},{\"key\":\"D\",\"value\":\"Phát triển an toàn và chất lượng\"}]', 'C', 1, '2024-12-17 20:05:40', '2024-12-17 20:05:40');
+INSERT INTO `questions` (`question_id`, `question_content`, `answer`, `correct_answer`, `question_bank_id`, `created_at`, `updated_at`) VALUES (68, 'Phát triển bền vững về môi trường là gì?', '[{\"key\":\"A\",\"value\":\" Sự cân bằng giữa sử dụng các yếu tố tự nhiên, nhân tạo, chất lượng môi trường sống của con người phải được bảo đảm. \"},{\"key\":\"B\",\"value\":\" Duy trì sự cân bằng giữa việc phát triển kinh tế, khai thác tài nguyên thiên nhiên và bảo vệ môi trường.\"},{\"key\":\"C\",\"value\":\" Duy trì sự khai thác nguồn tài nguyên thiên nhiên phục vụ lợi ích con người, phát triển kinh tế.\"},{\"key\":\"D\",\"value\":\" Duy trì sự cân bằng giữa bảo vệ môi trường tự nhiên với sự khai thác nguồn tài nguyên thiên nhiên phục vụ lợi ích con người.\"}]', 'D', 1, '2024-12-17 20:05:40', '2024-12-17 20:05:40');
+INSERT INTO `questions` (`question_id`, `question_content`, `answer`, `correct_answer`, `question_bank_id`, `created_at`, `updated_at`) VALUES (69, 'Luật bảo vệ môi trường được Quốc hội ban hành lần đầu tiên vào năm?', '[{\"key\":\"A\",\"value\":\"2014.0\"},{\"key\":\"B\",\"value\":\"2015.0\"},{\"key\":\"C\",\"value\":\"2016.0\"},{\"key\":\"D\",\"value\":\"2017.0\"}]', 'A', 1, '2024-12-17 20:05:40', '2024-12-17 20:05:40');
+INSERT INTO `questions` (`question_id`, `question_content`, `answer`, `correct_answer`, `question_bank_id`, `created_at`, `updated_at`) VALUES (70, 'Khái niệm nền kinh tế xanh là?', '[{\"key\":\"A\",\"value\":\"Nền kinh tế có mức phát thải ổn định, khai thác, sử dụng tối đa tài nguyên thiên nhiên tái tạo và không tái tạo.\"},{\"key\":\"B\",\"value\":\"Nền kinh tế có mức phát thải thấp, sử dụng hiệu quả tài nguyên và hướng tới công bằng xã hội. \"},{\"key\":\"C\",\"value\":\" Nền kinh tế mà hoạt động sản xuất của con người gắn liền với khai thác và sử dụng tài nguyên thiên nhiên.\"},{\"key\":\"D\",\"value\":\" Nền kinh tế có hoạt động sản xuất của con người đi liền với việc tái sử dụng, tái chế. \"}]', 'B', 1, '2024-12-17 20:05:40', '2024-12-17 20:05:40');
+INSERT INTO `questions` (`question_id`, `question_content`, `answer`, `correct_answer`, `question_bank_id`, `created_at`, `updated_at`) VALUES (71, 'Nền kinh tế nâu là?', '[{\"key\":\"A\",\"value\":\"  Nền kinh tế tiêu tốn nhiều tài nguyên thiên nhiên, gây tổn hại tới môi trường. \"},{\"key\":\"B\",\"value\":\"  Nền kinh tế tiêu tốn nhiều chi phí cho việc khai thác, sử dụng tài nguyên thiên nhiên.\"},{\"key\":\"C\",\"value\":\"  Nền kinh tế có hoạt động sản xuất của con người đi liền với việc tái sử dụng, tái chế. \"},{\"key\":\"D\",\"value\":\" Nền kinh tế nâng cao đời sống của con người, công bằng xã hội, giảm thiểu những rủi ro môi trường. \"}]', 'A', 1, '2024-12-17 20:05:40', '2024-12-17 20:05:40');
+INSERT INTO `questions` (`question_id`, `question_content`, `answer`, `correct_answer`, `question_bank_id`, `created_at`, `updated_at`) VALUES (72, 'Các đặc điểm xanh chính trong ngành xây dựng xanh là?', '[{\"key\":\"A\",\"value\":\" Giảm rác thải trong quá trình xây dựng và vận hành, tái chế cấu trúc và vật liệu xây dựng, giảm thiểu tiêu thụ năng lượng.\"},{\"key\":\"B\",\"value\":\" Mái nhà xanh nhằm tiết kiệm năng lượng tiêu thụ cũng như phát triển năng lượng tái tạo, ưu tiên sử dụng vật liệu từ thiên nhiên. \"},{\"key\":\"C\",\"value\":\"Sử dụng năng lượng tái tạo thay cho năng lượng không tái tạo, tái sử dụng vật liệu xây dựng.\"},{\"key\":\"D\",\"value\":\"  Bảo vệ sức khỏe của người cư trú và cải thiện năng suất của người lao động, hạn chế các rủi ro tai nạn lao động. \"}]', 'A', 1, '2024-12-17 20:05:40', '2024-12-17 20:05:40');
+INSERT INTO `questions` (`question_id`, `question_content`, `answer`, `correct_answer`, `question_bank_id`, `created_at`, `updated_at`) VALUES (73, ' Hoạt động nào dưới đây nhằm làm giảm mức năng lượng tiêu thụ cũng như lượng khí thải gây ô nhiễm ra môi trường?', '[{\"key\":\"A\",\"value\":\" Phát triển các loại vận tải công cộng tiết kiệm năng lượng, sử dụng năng lượng sạch với lượng phát thải thấp. Kiểm soát số lượng xe hơi và xe máy của mỗi cá nhân. \"},{\"key\":\"B\",\"value\":\"Ban hành, triển khai bộ tiêu chuẩn về quản lý nhiên liệu, phát thải phương tiện vận tải. Sử dụng năng lượng tái tạo, nhiên liệu phát thải ít khí nhà kính hơn trong vận tải.\"},{\"key\":\"C\",\"value\":\" Kiểm soát ô nhiễm môi trường trong vận tải, phát thải từ xe hơi và xe máy. Kiểm soát số lượng xe hơi và xe máy của mỗi cá nhân. \"},{\"key\":\"D\",\"value\":\"Sử dụng năng lượng tái tạo, nhiên liệu phát thải ít khí nhà kính hơn trong vận tải. nghiêm cấm các phương tiện không đáp ứng tiêu chuẩn phát thải vận hành.\"}]', 'B', 1, '2024-12-17 20:05:40', '2024-12-17 20:05:40');
+INSERT INTO `questions` (`question_id`, `question_content`, `answer`, `correct_answer`, `question_bank_id`, `created_at`, `updated_at`) VALUES (74, ' Bảo vệ môi trường trong phát triển bền vững là?', '[{\"key\":\"A\",\"value\":\"  Giảm tác động của các hoạt động sản xuất đến môi trường thông qua quá trình, giảm thiểu sản xuất, thu gom, vận chuyển, tái sử dụng, tái chế và xử lý chất thải và hóa chất độc hại. \"},{\"key\":\"B\",\"value\":\"Giảm tác động của các hoạt động xã hội thông qua quá trình, giảm thiểu sản xuất, thu gom, vận chuyển, tái sử dụng, tái chế và xử lý chất thải và hóa chất độc hại. \"},{\"key\":\"C\",\"value\":\" Giảm tác động của các hoạt động sản xuất đến môi trường thông qua quá trình phòng ngừa, giảm thiểu, giám sát, phân loại, thu gom, vận chuyển, tái sử dụng, tái chế, xử lý chất thải và hóa chất độc hại. \"},{\"key\":\"D\",\"value\":\" Giảm tác động của các hoạt động văn hóa, giáo dục thông qua quá trình phòng ngừa, giảm thiểu, giám sát, phân loại, thu gom, vận chuyển, tái sử dụng, tái chế và xử lý chất thải và hóa chất độc hại. \"}]', 'C', 1, '2024-12-17 20:05:40', '2024-12-17 20:05:40');
+INSERT INTO `questions` (`question_id`, `question_content`, `answer`, `correct_answer`, `question_bank_id`, `created_at`, `updated_at`) VALUES (75, 'Theo khoản 18, 19 Điều 3 Luật Bảo vệ môi trường 2020 Chất thải là?', '[{\"key\":\"A\",\"value\":\" Tất cả vật chất phát sinh do các hoạt động sản xuất, kinh doanh, dịch vụ, sinh hoạt của con người tồn tại ở các dạng lỏng, được thải bỏ khi không còn hữu dụng hay khi không muốn dùng nữa.\"},{\"key\":\"B\",\"value\":\" Tất cả vật chất phát sinh do các hoạt động sản xuất, kinh doanh, dịch vụ, sinh hoạt của con người tồn tại ở dạng rắn, được thải bỏ khi không còn hữu dụng hay khi không muốn dùng nữa.\"},{\"key\":\"C\",\"value\":\"Tất cả vật chất phát sinh do các hoạt động sản xuất, kinh doanh, dịch vụ, sinh hoạt của con người, được thải bỏ khi không còn tái sử dụng, tái chế được nữa hay khi không muốn dùng nữa.\"},{\"key\":\"D\",\"value\":\" Chất thải là vật chất ở thể rắn, lỏng, khí hoặc ở dạng khác được thải ra từ hoạt động sản xuất, kinh doanh, dịch vụ, sinh hoạt hoặc hoạt động khác. \"}]', 'D', 1, '2024-12-17 20:05:40', '2024-12-17 20:05:40');
+INSERT INTO `questions` (`question_id`, `question_content`, `answer`, `correct_answer`, `question_bank_id`, `created_at`, `updated_at`) VALUES (76, 'Phân loại chất thải theo nguồn gốc phát sinh?', '[{\"key\":\"A\",\"value\":\" Chất thải rắn sinh hoạt, dịch vụ, chất thải xây dựng, chất thải công nghiệp, chất thải y tế. \"},{\"key\":\"B\",\"value\":\" Chất thải thực phẩm từ hộ gia đình, chất thải xây dựng, chất thải công nghiệp, chất thải y tế.\"},{\"key\":\"C\",\"value\":\"Chất thải từ các cơ sở công cộng, dịch vụ; chất thải xây dựng; chất thải công nghiệp; chất thải y tế.  \"},{\"key\":\"D\",\"value\":\" Chất thải nguy hại, chất thải xây dựng và chất thải không nguy hại.\"}]', 'A', 1, '2024-12-17 20:05:40', '2024-12-17 20:05:40');
+INSERT INTO `questions` (`question_id`, `question_content`, `answer`, `correct_answer`, `question_bank_id`, `created_at`, `updated_at`) VALUES (77, ' Phân loại rác thải tại nguồn?', '[{\"key\":\"A\",\"value\":\" Rác hữu cơ, rác vô cơ, rác tái chế.\"},{\"key\":\"B\",\"value\":\"Rác hữu cơ, rác tái chế, rác tái sử dụng.\"},{\"key\":\"C\",\"value\":\"  Rác thải nguy hại, rác thải hữu cơ, rác thải vô cơ.\"},{\"key\":\"D\",\"value\":\" Rác thải nguy hại, rác thải không nguy hại, rác tái chế.\"}]', 'A', 1, '2024-12-17 20:05:40', '2024-12-17 20:05:40');
+INSERT INTO `questions` (`question_id`, `question_content`, `answer`, `correct_answer`, `question_bank_id`, `created_at`, `updated_at`) VALUES (78, ' Luật hóa chất 2007 đưa ra khái niệm hóa chất nguy hiểm là?', '[{\"key\":\"A\",\"value\":\" Hóa chất có tất cả các đặc tính nguy hiểm: dễ cháy nổ, ô xy hóa cao, độc hại, ăn mòn hoặc gây tổn hại tới môi trường… \"},{\"key\":\"B\",\"value\":\" Hóa chất có đặc tính nguy hiểm: dễ cháy nổ, độc hại, ăn mòn hoặc gây tổn hại tới môi trường…\"},{\"key\":\"C\",\"value\":\"   Hóa chất được bộ y tế cảnh báo là nguy hiểm, độc hại đối với con người và môi trường sinh thái…\"},{\"key\":\"D\",\"value\":\" Hóa chất có một hoặc một số đặc tính nguy hiểm: dễ cháy nổ, ô xy hóa cao, độc hại, ăn mòn hoặc gây tổn hại tới môi trường… \"}]', 'D', 1, '2024-12-17 20:05:40', '2024-12-17 20:05:40');
+INSERT INTO `questions` (`question_id`, `question_content`, `answer`, `correct_answer`, `question_bank_id`, `created_at`, `updated_at`) VALUES (79, ' Hình ảnh bên dưới thể hiện đặc tính gì?', '[{\"key\":\"A\",\"value\":\" Chất dễ cháy.\"},{\"key\":\"B\",\"value\":\" Chất ô xy hóa.\"},{\"key\":\"C\",\"value\":\" Chất tự phản ứng.\"},{\"key\":\"D\",\"value\":\" Chất tự cháy, tự dẫn lửa.\"}]', 'B', 1, '2024-12-17 20:05:40', '2024-12-17 20:05:40');
+INSERT INTO `questions` (`question_id`, `question_content`, `answer`, `correct_answer`, `question_bank_id`, `created_at`, `updated_at`) VALUES (80, '  Hình ảnh bên dưới thể hiện đặc tính gì?', '[{\"key\":\"A\",\"value\":\" Chất ô xy hóa, Peroxit hữu cơ.\"},{\"key\":\"B\",\"value\":\"Chất ô xy hóa, chất có khả năng gây nổ.\"},{\"key\":\"C\",\"value\":\" Chất dễ cháy, Peroxit hữu cơ.\"},{\"key\":\"D\",\"value\":\" Chất dễ cháy, chất ô xy hóa.\"}]', 'C', 1, '2024-12-17 20:05:40', '2024-12-17 20:05:40');
+INSERT INTO `questions` (`question_id`, `question_content`, `answer`, `correct_answer`, `question_bank_id`, `created_at`, `updated_at`) VALUES (81, ' Ý nghĩa cốt lõi của kinh tế xanh là?', '[{\"key\":\"A\",\"value\":\" Tăng trưởng kinh tế đảm bảo đồng thời hai mục tiêu là bảo vệ môi trường sống trong sạch và bền vững.\"},{\"key\":\"B\",\"value\":\"  Tăng trưởng kinh tế đảm bảo không khai thác tài nguyên thiên nhiên, sử dụng năng lượng thay thế.\"},{\"key\":\"C\",\"value\":\"  Hạn chế tối thiểu phát thải vào môi trường, cân bằng lượng khí thải các ngành nghề.\"},{\"key\":\"D\",\"value\":\" Tăng trưởng kinh tế đồng đều tất cả các ngành nghề, đảm bảo đạt chỉ tiêu đặt ra hàng năm.\"}]', 'A', 1, '2024-12-17 20:05:40', '2024-12-17 20:05:40');
+INSERT INTO `questions` (`question_id`, `question_content`, `answer`, `correct_answer`, `question_bank_id`, `created_at`, `updated_at`) VALUES (82, ' Việt Nam bắt đầu làm quen với xu hướng phát triển kinh tế xanh của thế giới từ năm bao nhiêu?', '[{\"key\":\"A\",\"value\":\"   1999\"},{\"key\":\"B\",\"value\":\"  2000\"},{\"key\":\"C\",\"value\":\"  2001\"},{\"key\":\"D\",\"value\":\"  2010\"}]', 'B', 1, '2024-12-17 20:05:40', '2024-12-17 20:05:40');
+INSERT INTO `questions` (`question_id`, `question_content`, `answer`, `correct_answer`, `question_bank_id`, `created_at`, `updated_at`) VALUES (83, '2 + 2 = ?', '[{\"key\":\"A\",\"value\":\"2.0\"},{\"key\":\"B\",\"value\":\"3.0\"},{\"key\":\"C\",\"value\":\"4.0\"},{\"key\":\"D\",\"value\":\"5.0\"}]', 'C', 4, '2024-12-17 20:18:06', '2024-12-17 20:18:06');
+INSERT INTO `questions` (`question_id`, `question_content`, `answer`, `correct_answer`, `question_bank_id`, `created_at`, `updated_at`) VALUES (84, '3 + 3 = ?', '[{\"key\":\"A\",\"value\":\"4.0\"},{\"key\":\"B\",\"value\":\"5.0\"},{\"key\":\"C\",\"value\":\"6.0\"},{\"key\":\"D\",\"value\":\"7.0\"}]', 'C', 4, '2024-12-17 20:18:06', '2024-12-17 20:18:06');
+INSERT INTO `questions` (`question_id`, `question_content`, `answer`, `correct_answer`, `question_bank_id`, `created_at`, `updated_at`) VALUES (85, '2 + 2 = ?', '[{\"key\":\"A\",\"value\":\"2.0\"},{\"key\":\"B\",\"value\":\"3.0\"},{\"key\":\"C\",\"value\":\"4.0\"},{\"key\":\"D\",\"value\":\"5.0\"}]', 'C', 8, '2024-12-17 23:26:44', '2024-12-17 23:26:44');
+INSERT INTO `questions` (`question_id`, `question_content`, `answer`, `correct_answer`, `question_bank_id`, `created_at`, `updated_at`) VALUES (86, '3 + 3 = ?', '[{\"key\":\"A\",\"value\":\"4.0\"},{\"key\":\"B\",\"value\":\"5.0\"},{\"key\":\"C\",\"value\":\"6.0\"},{\"key\":\"D\",\"value\":\"7.0\"}]', 'C', 8, '2024-12-17 23:26:44', '2024-12-17 23:26:44');
+INSERT INTO `questions` (`question_id`, `question_content`, `answer`, `correct_answer`, `question_bank_id`, `created_at`, `updated_at`) VALUES (87, 'Câu 1 ', '[{\"key\":\"A\",\"value\":\"A\"},{\"key\":\"B\",\"value\":\"C\"},{\"key\":\"C\",\"value\":\"B\"},{\"key\":\"D\",\"value\":\"D\"}]', 'B', 9, '2024-12-17 23:29:16', '2024-12-17 23:29:16');
+INSERT INTO `questions` (`question_id`, `question_content`, `answer`, `correct_answer`, `question_bank_id`, `created_at`, `updated_at`) VALUES (88, '2 + 2 = ?', '[{\"key\":\"A\",\"value\":\"2.0\"},{\"key\":\"B\",\"value\":\"3.0\"},{\"key\":\"C\",\"value\":\"4.0\"},{\"key\":\"D\",\"value\":\"5.0\"}]', 'C', 8, '2024-12-17 23:33:02', '2024-12-17 23:33:02');
+INSERT INTO `questions` (`question_id`, `question_content`, `answer`, `correct_answer`, `question_bank_id`, `created_at`, `updated_at`) VALUES (89, '3 + 3 = ?', '[{\"key\":\"A\",\"value\":\"4.0\"},{\"key\":\"B\",\"value\":\"5.0\"},{\"key\":\"C\",\"value\":\"6.0\"},{\"key\":\"D\",\"value\":\"7.0\"}]', 'C', 8, '2024-12-17 23:33:02', '2024-12-17 23:33:02');
 COMMIT;
 
 -- ----------------------------
@@ -233,12 +285,17 @@ CREATE TABLE `result_answers` (
   KEY `FKuutyw4sxufhj2y5m7xp3grpv` (`result_id`),
   CONSTRAINT `FKqaieyg9kc7p3wdjd3x8fberwq` FOREIGN KEY (`question_id`) REFERENCES `questions` (`question_id`),
   CONSTRAINT `FKuutyw4sxufhj2y5m7xp3grpv` FOREIGN KEY (`result_id`) REFERENCES `results` (`result_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- ----------------------------
 -- Records of result_answers
 -- ----------------------------
 BEGIN;
+INSERT INTO `result_answers` (`id`, `is_correct`, `student_answer`, `question_id`, `result_id`) VALUES (1, b'1', 'C', 83, 1);
+INSERT INTO `result_answers` (`id`, `is_correct`, `student_answer`, `question_id`, `result_id`) VALUES (2, b'1', 'C', 84, 1);
+INSERT INTO `result_answers` (`id`, `is_correct`, `student_answer`, `question_id`, `result_id`) VALUES (3, b'1', 'B', 70, 3);
+INSERT INTO `result_answers` (`id`, `is_correct`, `student_answer`, `question_id`, `result_id`) VALUES (4, b'1', 'C', 74, 3);
+INSERT INTO `result_answers` (`id`, `is_correct`, `student_answer`, `question_id`, `result_id`) VALUES (5, b'0', 'C', 79, 3);
 COMMIT;
 
 -- ----------------------------
@@ -251,21 +308,22 @@ CREATE TABLE `results` (
   `submitted_at` datetime(6) DEFAULT NULL,
   `exam_id` bigint NOT NULL,
   `user_id` bigint NOT NULL,
+  `total_correct` double DEFAULT NULL,
+  `total_question` double DEFAULT NULL,
   PRIMARY KEY (`result_id`),
   KEY `FKeow9kom5hrbhv6jhq82bqe68k` (`exam_id`),
   KEY `FKxtl9ahma532if6r68yvgo7ck` (`user_id`),
   CONSTRAINT `FKeow9kom5hrbhv6jhq82bqe68k` FOREIGN KEY (`exam_id`) REFERENCES `exams` (`exam_id`),
   CONSTRAINT `FKxtl9ahma532if6r68yvgo7ck` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- ----------------------------
 -- Records of results
 -- ----------------------------
 BEGIN;
-INSERT INTO `results` (`result_id`, `score`, `submitted_at`, `exam_id`, `user_id`) VALUES (1, 2, '2024-12-16 20:37:21.642446', 1, 16);
-INSERT INTO `results` (`result_id`, `score`, `submitted_at`, `exam_id`, `user_id`) VALUES (2, 0, '2024-12-16 22:08:04.782756', 1, 16);
-INSERT INTO `results` (`result_id`, `score`, `submitted_at`, `exam_id`, `user_id`) VALUES (3, 1, '2024-12-16 22:58:29.507500', 4, 20);
-INSERT INTO `results` (`result_id`, `score`, `submitted_at`, `exam_id`, `user_id`) VALUES (4, 1, '2024-12-16 22:58:39.218650', 4, 20);
+INSERT INTO `results` (`result_id`, `score`, `submitted_at`, `exam_id`, `user_id`, `total_correct`, `total_question`) VALUES (1, 0, '2024-12-17 20:35:57.825975', 3, 16, 2, 2);
+INSERT INTO `results` (`result_id`, `score`, `submitted_at`, `exam_id`, `user_id`, `total_correct`, `total_question`) VALUES (2, 0, '2024-12-17 23:33:59.867901', 6, 23, 0, 0);
+INSERT INTO `results` (`result_id`, `score`, `submitted_at`, `exam_id`, `user_id`, `total_correct`, `total_question`) VALUES (3, 0, '2024-12-17 23:34:29.613285', 5, 16, 2, 3);
 COMMIT;
 
 -- ----------------------------
@@ -299,7 +357,7 @@ CREATE TABLE `subjects` (
   `subject_name` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
   `updated_at` datetime(6) DEFAULT NULL,
   PRIMARY KEY (`subject_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- ----------------------------
 -- Records of subjects
@@ -313,6 +371,7 @@ INSERT INTO `subjects` (`subject_id`, `created_at`, `description`, `subject_name
 INSERT INTO `subjects` (`subject_id`, `created_at`, `description`, `subject_name`, `updated_at`) VALUES (6, '2024-12-15 22:31:23.365211', 'Lý 2024', 'Lý ĐC', '2024-12-15 22:31:23.365231');
 INSERT INTO `subjects` (`subject_id`, `created_at`, `description`, `subject_name`, `updated_at`) VALUES (8, '2024-12-16 22:45:47.785099', 'Hoa hoc dai cuong', 'Hoa ', '2024-12-16 22:45:47.785117');
 INSERT INTO `subjects` (`subject_id`, `created_at`, `description`, `subject_name`, `updated_at`) VALUES (9, '2024-12-16 22:46:58.460364', 'TK Description', 'TK Subject', '2024-12-16 22:46:58.460492');
+INSERT INTO `subjects` (`subject_id`, `created_at`, `description`, `subject_name`, `updated_at`) VALUES (10, '2024-12-17 23:25:32.212249', 'Kiem tra cuối kỳ Hoá 1 ', 'Kiem tra cuối kỳ Hoá 1 ', '2024-12-17 23:25:32.212304');
 COMMIT;
 
 -- ----------------------------
@@ -329,7 +388,7 @@ CREATE TABLE `users` (
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`user_id`) USING BTREE,
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- ----------------------------
 -- Records of users
@@ -345,6 +404,10 @@ INSERT INTO `users` (`user_id`, `email`, `password`, `role`, `full_name`, `creat
 INSERT INTO `users` (`user_id`, `email`, `password`, `role`, `full_name`, `created_at`, `updated_at`) VALUES (19, 'hoa@gmail.com', '8b5b93d25ef8671beb1c9e0d2e9607df:f8df2dd7189aac92840f81cde00cec87eaf6e0b88912af399151bf2140e67aef', 'teacher', 'hoa hoc ', '2024-12-16 22:42:04', '2024-12-16 22:43:00');
 INSERT INTO `users` (`user_id`, `email`, `password`, `role`, `full_name`, `created_at`, `updated_at`) VALUES (20, 'tung@gmail.com', '5da8c7ffb50ab3c20960815d3f95374f:524a675fd5a09a11d5f3ef9e3517ac677873354dda78a03ad76bc96d66a093d7', 'student', 'phamj thanh ', '2024-12-16 22:43:37', '2024-12-16 22:43:47');
 INSERT INTO `users` (`user_id`, `email`, `password`, `role`, `full_name`, `created_at`, `updated_at`) VALUES (21, 'tk_1@gmail.com', 'c0c6e174ce07188cf07d19ef495cf27a:98e9baa4ff6efc02e5cc4f5c428970df5b850d49aa76b329999d9e0732c75c5c', 'teacher', 'TK Teacher', '2024-12-16 22:45:40', '2024-12-16 22:45:40');
+INSERT INTO `users` (`user_id`, `email`, `password`, `role`, `full_name`, `created_at`, `updated_at`) VALUES (22, 'teacher_Hoahoc@gmail.com', '6922016a516379ab3a2a42885fe65e7c:c7fbb8f0c7a6725fbe9fdc153d0c1c54900df7963dc404840afcfdd49604a22f', 'teacher', 'Hoa hoc@gmail.com', '2024-12-17 23:22:39', '2024-12-17 23:22:39');
+INSERT INTO `users` (`user_id`, `email`, `password`, `role`, `full_name`, `created_at`, `updated_at`) VALUES (23, 'student1@gmail.com', '4bb9c3d5a24cc7aa06331da2b7424eea:8b997126d71b49a652bc082cdde320f085e654a44f18cb5a190230a184fc7497', 'student', 'student1@gmail.com', '2024-12-17 23:22:57', '2024-12-17 23:22:57');
+INSERT INTO `users` (`user_id`, `email`, `password`, `role`, `full_name`, `created_at`, `updated_at`) VALUES (24, 'student2@gmail.com', 'd6303919c2ae42e9d475b3da9aa14bf4:4ce287e3b69eaf75c667e64b8a6cb3e7210cef05e39da085c3425f6447057a48', 'student', 'student2@gmail.com', '2024-12-17 23:23:07', '2024-12-17 23:23:07');
+INSERT INTO `users` (`user_id`, `email`, `password`, `role`, `full_name`, `created_at`, `updated_at`) VALUES (25, 'student3@gmail.com', '4aa01b58b5dba00d9b3a81222028888f:c922153e55ae21b7870fa000bb6b29f37b16ec2085d2b7daf4f0e47fec493d98', 'student', 'student3@gmail.com', '2024-12-17 23:23:18', '2024-12-17 23:23:18');
 COMMIT;
 
 SET FOREIGN_KEY_CHECKS = 1;

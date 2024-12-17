@@ -42,18 +42,21 @@ public class ResultServiceImpl implements ResultService {
         result.setExam(exam);
         result.setSubmittedAt(LocalDateTime.now());
         result.setScore(0); // Tạm thời set điểm = 0
-
+        result.setTotalCorrect(0); // Tạm thời set điểm = 0
+        result.setTotalQuestion(0); // Tạm thời set điểm = 0
         result = resultRepository.save(result);
 
         // Xử lý từng câu trả lời
         double totalScore = 0;
+        double totalQuestion = 0;
+        double totalCorrect = 0;
         for (AnswerDto answerDto : submissionDto.getAnswers()) {
             Question question = questionRepository.findById(answerDto.getQuestionId())
                     .orElseThrow(() -> new IllegalArgumentException("Question not found"));
-
+            totalQuestion += 1;
             boolean isCorrect = question.getCorrectAnswer().equals(answerDto.getStudentAnswer());
             if (isCorrect) {
-                totalScore += 1; // Mỗi câu đúng 1 điểm (tuỳ logic)
+                totalCorrect += 1; // Mỗi câu đúng 1 điểm (tuỳ logic)
             }
 
             ResultAnswer resultAnswer = new ResultAnswer();
@@ -66,7 +69,8 @@ public class ResultServiceImpl implements ResultService {
         }
 
         // Cập nhật điểm tổng kết
-        result.setScore(totalScore);
+        result.setTotalQuestion(totalQuestion);
+        result.setTotalCorrect(totalCorrect);
         resultRepository.save(result);
 
         return result.getResultId();

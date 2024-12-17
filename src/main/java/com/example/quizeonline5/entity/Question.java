@@ -13,11 +13,13 @@ public class Question {
     @JsonProperty("question_id")
     private Long questionId;
 
-    @Column(name = "question_content")
+    @Lob
+    @Column(name = "question_content", length = 64000)
     @JsonProperty("question")
     private String questionContent;
 
-    @Column(nullable = false,name = "answer")
+    @Lob
+    @Column(nullable = false, name = "answer", columnDefinition = "TEXT", length = 64000)
     @JsonProperty("answer")
     private String answer;
 

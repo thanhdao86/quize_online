@@ -58,8 +58,17 @@ public class QuestionBankServiceImpl implements QuestionBankService {
     }
 
     @Override
-    public List<QuestionBank> getAllQuestionBanksByUser(Long userId) {
-        return questionBankRepository.findByCreatedBy_UserId(userId);
+    public  List<Map<String, Object>> getAllQuestionBanksByUser(Long userId) {
+        // get all question banks created by the user
+        return questionBankRepository.findByCreatedBy_UserId(userId).stream().map(questionBank -> {
+            Map<String, Object> map = new HashMap<>();
+            map.put("question_bank_id", questionBank.getQuestionBankId());
+            map.put("bank_name", questionBank.getBankName());
+            map.put("is_public", questionBank.isPublic());
+            map.put("created_by", questionBank.getCreatedBy());
+            map.put("created_at", questionBank.getCreatedAt());
+            return map;
+        }).collect(Collectors.toList());
     }
 
     @Override

@@ -10,7 +10,7 @@ public interface QuestionBankService {
     Long createQuestionBank(QuestionBankDto questionBankDto);
     void deleteQuestionBank(Long questionBankId);
     void updateQuestionBank(Long questionBankId, QuestionBankDto questionBankDto);
-    List<QuestionBank> getAllQuestionBanksByUser(Long userId);
+    List<Map<String, Object>> getAllQuestionBanksByUser(Long userId);
     QuestionBankDetailDto getQuestionBankDetails(Long questionBankId);
     List<Map<String, Object>> getAllQuestionBank();
 }

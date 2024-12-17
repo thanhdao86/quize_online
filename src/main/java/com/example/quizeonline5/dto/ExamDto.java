@@ -1,8 +1,13 @@
 package com.example.quizeonline5.dto;
 
+import com.example.quizeonline5.entity.Result;
+import com.example.quizeonline5.entity.ResultAnswer;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Data;
+
 import java.util.List;
 
+@Data
 public class ExamDto {
     @JsonProperty("exam_id")
     private Long examId;
@@ -24,6 +29,11 @@ public class ExamDto {
 
     @JsonProperty("questions")
     private List<ExamQuestionDetailsDto> questions;
+
+    @JsonProperty("status")
+    private Long status;
+
+    private Result result;
 
     // Constructors
     public ExamDto() {}
@@ -83,5 +93,13 @@ public class ExamDto {
 
     public void setQuestions(List<ExamQuestionDetailsDto> questions) {
         this.questions = questions;
+    }
+
+    public Long getStatus() {
+        return status;
+    }
+
+    public void setStatus(Long status) {
+        this.status = status;
     }
 }

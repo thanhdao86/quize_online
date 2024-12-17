@@ -164,10 +164,21 @@ public class ClassServiceImpl implements ClassService {
 
         return classes.stream().map(classEntity -> {
             Map<String, Object> map = new HashMap<>();
+
+            // get all student in class
+            List<Map<String, Object>> students = classEntity.getStudents().stream().map(classStudent -> {
+                Map<String, Object> studentMap = new HashMap<>();
+                studentMap.put("student_id", classStudent.getUserId());
+                studentMap.put("full_name", classStudent.getFullName());
+                studentMap.put("email", classStudent.getEmail());
+                return studentMap;
+            }).collect(Collectors.toList());
+
             map.put("class_id", classEntity.getClassId());
             map.put("class_name", classEntity.getClassName());
             map.put("subject_id", classEntity.getSubject().getSubjectId());
             map.put("subject_name", classEntity.getSubject().getSubjectName());
+            map.put("students", students);
             return map;
         }).collect(Collectors.toList());
     }
