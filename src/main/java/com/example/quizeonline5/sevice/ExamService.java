@@ -11,4 +11,5 @@ public interface ExamService {
     ExamDto getExamDetails(Long examId);
     List<Exam> getExamByClassId(Long classId);
     void updateExam(Long examId, ExamDto examDto); // Add this method
+    List<Exam> getExamsByUserId(Long userId);
 }

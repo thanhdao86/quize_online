@@ -76,4 +76,21 @@ public class QuestionServiceImpl implements QuestionService {
                 return map;
             }).collect(Collectors.toList());
     }
+
+    @Override
+    public List<Map<String, Object>> getQuestionsByUserId(Long userId) {
+        return questionRepository.findAll().stream()
+                .filter(question -> question.getQuestionBank().getCreatedBy().getUserId().equals(userId))
+                .map(question -> {
+                    Map<String, Object> map = new HashMap<>();
+                    map.put("question_id", question.getQuestionId());
+                    map.put("question", question.getQuestionContent());
+                    map.put("answer", question.getAnswer());
+                    map.put("correct_answer", question.getCorrectAnswer());
+                    map.put("question_bank_id", question.getQuestionBank().getQuestionBankId());
+                    map.put("created_at", question.getCreatedAt());
+                    map.put("updated_at", question.getUpdatedAt());
+                    return map;
+                }).collect(Collectors.toList());
+    }
 }

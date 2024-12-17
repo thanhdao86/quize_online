@@ -44,4 +44,10 @@ public class ExamController {
     public ResponseEntity<?> getExamDetailByClassId(@PathVariable Long classId) {
         return new ResponseEntity< >(CommonResponse.success(examService.getExamByClassId(classId)), HttpStatus.OK);
     }
+
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<?> getExamsByUserId(@PathVariable Long userId) {
+        List<Exam> exams = examService.getExamsByUserId(userId);
+        return ResponseEntity.ok(CommonResponse.success(exams));
+    }
 }

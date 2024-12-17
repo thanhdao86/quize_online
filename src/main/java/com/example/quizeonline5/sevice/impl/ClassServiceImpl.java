@@ -157,7 +157,19 @@ public class ClassServiceImpl implements ClassService {
 
     @Override
     public List<Map<String, Object>> getClassesByTeacher(Long teacherId) {
-        return List.of();
+        User teacher = userRepository.findById(teacherId)
+                .orElseThrow(() -> new IllegalArgumentException("Teacher not found"));
+
+        List<Classes> classes = classRepository.findByTeacher(teacher);
+
+        return classes.stream().map(classEntity -> {
+            Map<String, Object> map = new HashMap<>();
+            map.put("class_id", classEntity.getClassId());
+            map.put("class_name", classEntity.getClassName());
+            map.put("subject_id", classEntity.getSubject().getSubjectId());
+            map.put("subject_name", classEntity.getSubject().getSubjectName());
+            return map;
+        }).collect(Collectors.toList());
     }
 
     @Override
