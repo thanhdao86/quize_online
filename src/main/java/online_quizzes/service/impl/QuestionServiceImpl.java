@@ -93,4 +93,20 @@ public class QuestionServiceImpl implements QuestionService {
                     return map;
                 }).collect(Collectors.toList());
     }
+
+    @Override
+    public Long updateQuestion(Long questionId, QuestionDto questionDto) {
+        // Lấy câu hỏi từ ID
+        Question question = questionRepository.findById(questionId)
+                .orElseThrow(() -> new IllegalArgumentException("Question not found"));
+
+        // Cập nhật thông tin câu hỏi
+        question.setQuestionContent(questionDto.getQuestionContent());
+        question.setAnswer(questionDto.getAnswer());
+        question.setCorrectAnswer(questionDto.getCorrectAnswer());
+        question.setUpdatedAt(LocalDateTime.now());
+
+        // Lưu câu hỏi vào cơ sở dữ liệu
+        return questionRepository.save(question).getQuestionId();
+    }
 }

@@ -115,7 +115,10 @@ public class ClassServiceImpl implements ClassService {
 
     @Override
     public List<Map<String, Object>> getAllClasses() {
-        return classRepository.findAll().stream().map(classEntity -> {
+        return classRepository.findAll()
+                .stream()
+                .sorted((s1, s2) -> s2.getCreatedAt().compareTo(s1.getCreatedAt()))
+                .map(classEntity -> {
             Map<String, Object> map = new HashMap<>();
             map.put("class_id", classEntity.getClassId());
             map.put("class_name", classEntity.getClassName());
@@ -123,6 +126,9 @@ public class ClassServiceImpl implements ClassService {
             map.put("subject_name", classEntity.getSubject().getSubjectName());
             map.put("teacher_id", classEntity.getTeacher().getUserId());
             map.put("teacher_name", classEntity.getTeacher().getFullName());
+            // created at
+            map.put("created_at", classEntity.getCreatedAt());
+            map.put("updated_at", classEntity.getUpdatedAt());
             return map;
         }).collect(Collectors.toList());
     }

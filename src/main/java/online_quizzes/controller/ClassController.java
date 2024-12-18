@@ -23,7 +23,6 @@ public class ClassController {
     @GetMapping
     public ResponseEntity<?> getAllClasses() {
         return new ResponseEntity< >(CommonResponse.success(classService.getAllClasses()), HttpStatus.OK);
-//        return ResponseEntity.ok(classService.getAllClasses());
     }
 
 

@@ -47,7 +47,10 @@ public class SubjectServiceImpl implements SubjectService {
 
     @Override
     public List<Subject> getAllSubjects() {
-        return subjectRepository.findAll().stream().toList();
+        return subjectRepository.findAll()
+                .stream()
+                .sorted((s1, s2) -> s2.getCreatedAt().compareTo(s1.getCreatedAt()))
+                .toList();
     }
 
     @Override

@@ -12,5 +12,5 @@ public interface QuestionBankService {
     void updateQuestionBank(Long questionBankId, QuestionBankDto questionBankDto);
     List<Map<String, Object>> getAllQuestionBanksByUser(Long userId);
     QuestionBankDetailDto getQuestionBankDetails(Long questionBankId);
-    List<Map<String, Object>> getAllQuestionBank();
+    List<Map<String, Object>> getAllQuestionBank(Long teacherId);
 }

@@ -84,7 +84,7 @@ public class ExamServiceImpl implements ExamService {
 
     @Override
     public List<Exam> getAllExams() {
-        return examRepository.findAll();
+        return examRepository.findAll().stream().sorted((e1, e2) -> e2.getCreatedAt().compareTo(e1.getCreatedAt())).collect(Collectors.toList());
     }
 
     @Override

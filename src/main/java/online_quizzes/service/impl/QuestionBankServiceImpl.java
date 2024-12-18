@@ -105,7 +105,23 @@ public class QuestionBankServiceImpl implements QuestionBankService {
     }
 
     @Override
-    public List<Map<String, Object>> getAllQuestionBank() {
+    public List<Map<String, Object>> getAllQuestionBank(Long teacherId) {
+        if (teacherId != null) {
+            return questionBankRepository.findAll()
+                    .stream()
+                    .filter(questionBank -> questionBank.isPublic() || questionBank.getCreatedBy().getUserId().equals(teacherId))
+                    .map(questionBank -> {
+                Map<String, Object> map = new HashMap<>();
+                map.put("question_bank_id", questionBank.getQuestionBankId());
+                map.put("bank_name", questionBank.getBankName());
+                map.put("is_public", questionBank.isPublic());
+                map.put("created_by", questionBank.getCreatedBy());
+                map.put("created_at", questionBank.getCreatedAt());
+                return map;
+            }).collect(Collectors.toList());
+
+        }
+
         return questionBankRepository.findAll().stream().map(questionBank -> {
             Map<String, Object> map = new HashMap<>();
             map.put("question_bank_id", questionBank.getQuestionBankId());

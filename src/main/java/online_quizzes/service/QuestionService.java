@@ -10,4 +10,5 @@ public interface QuestionService {
     List<Map<String, Object>>  getAllQuestion();
     List<Map<String, Object>>  getAllQuestion(Long bankId);
     List<Map<String, Object>> getQuestionsByUserId(Long userId);
+    Long updateQuestion(Long questionId, QuestionDto questionDto);
 }

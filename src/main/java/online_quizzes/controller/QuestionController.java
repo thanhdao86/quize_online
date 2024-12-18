@@ -50,4 +50,13 @@ public class QuestionController {
         List<Map<String, Object>> questions = questionService.getQuestionsByUserId(userId);
         return ResponseEntity.ok(CommonResponse.success(questions));
     }
+
+
+    @PutMapping("/{questionId}")
+    public ResponseEntity<?> updateQuestion(
+            @PathVariable Long questionId,
+            @RequestBody QuestionDto questionDto) {
+        Long res = questionService.updateQuestion(questionId, questionDto);
+        return ResponseEntity.ok(CommonResponse.success("Question added successfully with ID: " + res));
+    }
 }

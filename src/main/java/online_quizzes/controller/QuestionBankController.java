@@ -48,7 +48,7 @@ public class QuestionBankController {
     }
 
     @GetMapping
-    public ResponseEntity<?> getAllQuestionBank() {
-        return new ResponseEntity<>(CommonResponse.success(questionBankService.getAllQuestionBank()), HttpStatus.OK);
+    public ResponseEntity<?> getAllQuestionBank(@RequestParam(name = "teacher_id", required = false) Long teacherId) {
+        return new ResponseEntity<>(CommonResponse.success(questionBankService.getAllQuestionBank(teacherId)), HttpStatus.OK);
     }
 }
