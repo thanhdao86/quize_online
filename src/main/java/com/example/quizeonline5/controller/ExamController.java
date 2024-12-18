@@ -39,7 +39,11 @@ public class ExamController {
     @GetMapping("/{examId}")
     public ResponseEntity<?> getExamDetails(@PathVariable Long examId,
                                             @RequestParam(name = "student_id", required = false) Long studentId) {
-        return new ResponseEntity< >(CommonResponse.success(examService.getExamDetails(examId, studentId)), HttpStatus.OK);
+        try {
+            return ResponseEntity.ok(CommonResponse.success(examService.getExamDetails(examId, studentId)));
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(CommonResponse.error(e.getMessage()));
+        }
     }
 
     @GetMapping("/class/{classId}")

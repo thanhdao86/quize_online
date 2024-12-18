@@ -12,6 +12,12 @@ public class ExamQuestionDetailsDto {
     @JsonProperty("answer")
     private String answer;
 
+    @JsonProperty("student_answer")
+    private String studentAnswer;
+
+    @JsonProperty("correct_answer")
+    private String correctAnswer;
+
     @JsonProperty("question_bank_id")
     private Long bankId;
 
@@ -49,5 +55,21 @@ public class ExamQuestionDetailsDto {
 
     public void setBankId(Long bankId) {
         this.bankId = bankId;
+    }
+
+    public String getCorrectAnswer() {
+        return correctAnswer;
+    }
+
+    public void setCorrectAnswer(String correctAnswer) {
+        this.correctAnswer = correctAnswer;
+    }
+
+    public String getStudentAnswer() {
+        return studentAnswer;
+    }
+
+    public void setStudentAnswer(String studentAnswer) {
+        this.studentAnswer = studentAnswer;
     }
 }

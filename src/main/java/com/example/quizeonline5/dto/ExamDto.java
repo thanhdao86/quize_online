@@ -33,7 +33,8 @@ public class ExamDto {
     @JsonProperty("status")
     private Long status;
 
-    private Result result;
+    @JsonProperty("result")
+    private ResultDto result;
 
     // Constructors
     public ExamDto() {}
