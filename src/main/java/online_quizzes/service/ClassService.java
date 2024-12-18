@@ -16,7 +16,7 @@ public interface ClassService {
     List<Map<String, Object>> getStudentsInClass(Long classId);
     Map<String, Object> getTeacherInClass(Long classId);
     List<Map<String, Object>> getClassesByTeacher(Long teacherId);
-    Classes getClassById(Long classId);
+    ClassDto getClassById(Long classId);
     ApiResponse addStudentToClass(Long classId, StudentDto studentDto);
     List<ClassDto> getEnrolledClassByStudent(Long studentId);
 }

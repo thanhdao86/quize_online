@@ -24,4 +24,8 @@ public class SubjectDto {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    public void setSubjectId(Long subjectId) {
+
+    }
 }

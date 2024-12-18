@@ -6,12 +6,24 @@ public class StudentDto {
     @JsonProperty("student_id")
     private Long studentId;
 
+    @JsonProperty("full_name")
+    private String fullName;
+
     // Getters and Setters
     public Long getStudentId() {
         return studentId;
     }
+
     public void setStudentId(Long studentId) {
         this.studentId = studentId;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
     public StudentDto(Long studentId) {
@@ -19,5 +31,9 @@ public class StudentDto {
     }
 
     public StudentDto() {
+    }
+
+    public void setEmail(String email) {
+
     }
 }

@@ -76,7 +76,7 @@ public class ClassController {
     // get class by classId
     @GetMapping("/{classId}")
     public ResponseEntity<CommonResponse> getClassById(@PathVariable Long classId) {
-        Classes dtClass = classService.getClassById(classId);
+        ClassDto dtClass = classService.getClassById(classId);
         if (dtClass != null) {
             return new ResponseEntity< >(CommonResponse.success(dtClass), HttpStatus.OK);
         }

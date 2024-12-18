@@ -184,10 +184,44 @@ public class ClassServiceImpl implements ClassService {
     }
 
     @Override
-    public Classes getClassById(Long classId) {
-        return  classRepository.findById(classId)
+    public ClassDto getClassById(Long classId) {
+        Classes classEntity = classRepository.findById(classId)
                 .orElseThrow(() -> new IllegalArgumentException("Class not found"));
 
+        ClassDto classDto = new ClassDto();
+        classDto.setClassId(classEntity.getClassId());
+        classDto.setClassName(classEntity.getClassName());
+
+        // Map teacher
+        UserDto teacherDto = new UserDto();
+        teacherDto.setUserId(classEntity.getTeacher().getUserId());
+        teacherDto.setFullName(classEntity.getTeacher().getFullName());
+        teacherDto.setEmail(classEntity.getTeacher().getEmail());
+        classDto.setTeacher(teacherDto);
+
+        // Map subject
+        SubjectDto subjectDto = new SubjectDto();
+        subjectDto.setSubjectId(classEntity.getSubject().getSubjectId());
+        subjectDto.setSubjectName(classEntity.getSubject().getSubjectName());
+        classDto.setSubject(subjectDto);
+
+        // Map students carefully
+        List<StudentDto> studentDtos = classEntity.getStudents().stream()
+                .map(student -> {
+                    StudentDto studentDto = new StudentDto();
+                    studentDto.setStudentId(student.getUserId());
+                    studentDto.setFullName(student.getFullName());
+                    studentDto.setEmail(student.getEmail());
+                    return studentDto;
+                })
+                .collect(Collectors.toList());
+
+        classDto.setStudents(studentDtos);
+        classDto.setCreatedAt(classEntity.getCreatedAt());
+        classDto.setSubjectId(classEntity.getSubject().getSubjectId());
+        classDto.setTeacherId(classEntity.getTeacher().getUserId());
+
+        return classDto;
     }
 
     @Override

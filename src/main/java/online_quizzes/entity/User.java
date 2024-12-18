@@ -1,11 +1,14 @@
 package online_quizzes.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -95,5 +98,18 @@ public class User {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    @ManyToMany(mappedBy = "students")
+    @JsonIgnore
+    private Set<Classes> classes = new HashSet<>();
+
+    // Add getter and setter
+    public Set<Classes> getClasses() {
+        return classes;
+    }
+
+    public void setClasses(Set<Classes> classes) {
+        this.classes = classes;
     }
 }

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 import java.util.List;
+import java.util.Map;
 
 @Data
 public class ExamDto {
@@ -27,6 +28,9 @@ public class ExamDto {
 
     @JsonProperty("questions")
     private List<ExamQuestionDetailsDto> questions;
+
+    @JsonProperty("student_participations")
+    private List<Map<String, Object>> studentParticipations;
 
     @JsonProperty("status")
     private Long status;
@@ -100,5 +104,13 @@ public class ExamDto {
 
     public void setStatus(Long status) {
         this.status = status;
+    }
+
+    public List<Map<String, Object>> getStudentParticipations() {
+        return studentParticipations;
+    }
+
+    public void setStudentParticipations(List<Map<String, Object>> studentParticipations) {
+        this.studentParticipations = studentParticipations;
     }
 }
