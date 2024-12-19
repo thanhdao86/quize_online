@@ -15,4 +15,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     @Query("SELECT u FROM User u JOIN u.classes c WHERE c = :classEntity AND u.role = :role")
     List<User> findByClassesContainingAndRole(Classes classEntity, String role);
+
+    long countByRole(String role);
 }
