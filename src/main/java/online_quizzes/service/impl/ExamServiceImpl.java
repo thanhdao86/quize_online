@@ -95,9 +95,13 @@ public class ExamServiceImpl implements ExamService {
         Classes classEntity = classRepository.findById(examDto.getClassId())
                 .orElseThrow(() -> new IllegalArgumentException("Class not found"));
 
+        Subject subject = subjectRepository.findById(examDto.getSubjectId())
+                .orElseThrow(() -> new IllegalArgumentException("Subject not found"));
+
         exam.setExamName(examDto.getExamName());
         exam.setDuration(examDto.getDuration());
         exam.setClassEntity(classEntity);
+        exam.setSubject(subject);
         exam.setUpdatedAt(LocalDateTime.now());
 
         examRepository.save(exam);

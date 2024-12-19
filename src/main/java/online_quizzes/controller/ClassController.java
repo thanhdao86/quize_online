@@ -25,7 +25,6 @@ public class ClassController {
         return new ResponseEntity< >(CommonResponse.success(classService.getAllClasses()), HttpStatus.OK);
     }
 
-
     @PostMapping
     public ResponseEntity<ApiResponse> createClass(@RequestBody ClassDto classDto) {
         ApiResponse apiResponse = classService.createClass(classDto);
