@@ -435,6 +435,7 @@ public class ExamServiceImpl implements ExamService {
         examDto.setCreatedBy(exam.getCreatedBy().getUserId());
         examDto.setDuration(exam.getDuration());
         examDto.setQuestions(questionDtos);
+        examDto.setCreatedAt(exam.getCreatedAt());
 
         return examDto;
     }

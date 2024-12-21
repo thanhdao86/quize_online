@@ -3,6 +3,7 @@ package online_quizzes.dto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
@@ -37,6 +38,9 @@ public class ExamDto {
 
     @JsonProperty("result")
     private ResultDto result;
+
+    @JsonProperty("created_at")
+    private LocalDateTime createdAt;
 
     // Constructors
     public ExamDto() {}

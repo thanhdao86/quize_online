@@ -1,7 +1,11 @@
 package online_quizzes.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Data;
 
+import java.time.LocalDateTime;
+
+@Data
 public class ExamQuestionDetailsDto {
     @JsonProperty("question_id")
     private Long questionId;
@@ -20,6 +24,9 @@ public class ExamQuestionDetailsDto {
 
     @JsonProperty("question_bank_id")
     private Long bankId;
+
+    @JsonProperty("created_at")
+    private LocalDateTime createdAt;
 
     // Constructors
     public ExamQuestionDetailsDto() {}
